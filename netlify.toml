@@ -1,7 +1,10 @@
 # Solglimt Hotel – Netlify-oppsett
 [build]
   publish = "."
-  functions = "netlify/functions"
+  functions = "."
+
+[functions]
+  node_bundler = "esbuild"
 
 [[headers]]
   for = "/sw.js"
