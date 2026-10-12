@@ -1,0 +1,9 @@
+# Solglimt Hotel – Netlify-oppsett
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"

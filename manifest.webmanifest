@@ -1,0 +1,42 @@
+{
+  "name": "Solglimt Hotel",
+  "short_name": "Solglimt",
+  "description": "Bygg et slitent øyhotell opp til ti stjerner – med gjester, minispill, dyr, hemmeligheter og besøk hos venner.",
+  "lang": "no",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#2b6f78",
+  "theme_color": "#2b6f78",
+  "categories": [
+    "games",
+    "kids"
+  ],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
