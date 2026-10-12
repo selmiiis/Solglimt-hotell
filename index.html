@@ -1476,13 +1476,13 @@ const facById=id=>FAC.find(f=>f.id===id);
 const STAR_REQ={
   2:{happy:8,comfort:60,fac:1,coins:600,sol:0},
   3:{happy:25,comfort:150,fac:3,coins:1800,sol:3},
-  4:{happy:55,comfort:260,fac:5,coins:4000,sol:6,daily:1},
-  5:{happy:100,comfort:400,fac:7,coins:7500,sol:10,daily:2},
-  6:{happy:150,comfort:520,fac:9,coins:10000,sol:12,daily:4},
-  7:{happy:210,comfort:680,fac:10,coins:14000,sol:14,daily:7,wing:['grunnmur','lounge']},
-  8:{happy:280,comfort:820,fac:11,coins:18000,sol:16,daily:11,wing:['grunnmur','lounge','spa','suiter2']},
-  9:{happy:360,comfort:950,fac:11,coins:22000,sol:18,daily:16,wing:['grunnmur','lounge','spa','suiter2','vinterhage']},
-  10:{happy:450,comfort:1080,fac:11,coins:28000,sol:22,daily:22,wing:['grunnmur','lounge','spa','suiter2','vinterhage','ballsal']}
+  4:{happy:55,comfort:260,fac:5,coins:4000,sol:6},
+  5:{happy:90,comfort:380,fac:7,coins:6500,sol:9},
+  6:{happy:125,comfort:480,fac:8,coins:8500,sol:11},
+  7:{happy:165,comfort:600,fac:9,coins:11000,sol:12,wing:['grunnmur','lounge']},
+  8:{happy:210,comfort:720,fac:10,coins:14000,sol:14,wing:['grunnmur','lounge','spa','suiter2']},
+  9:{happy:260,comfort:840,fac:11,coins:17000,sol:16,wing:['grunnmur','lounge','spa','suiter2','vinterhage']},
+  10:{happy:320,comfort:960,fac:12,coins:21000,sol:19,wing:['grunnmur','lounge','spa','suiter2','vinterhage','ballsal']}
 };
 function starReqRows(n){
   const q=STAR_REQ[n]; if(!q) return null;
@@ -1623,7 +1623,7 @@ function newState(){
 }
 function genMess(n){const m=['🧦','🍌','📰','🥤','🍂','🧻','🍪','👕'];const a=[];for(let i=0;i<n;i++)a.push({e:pick(m),x:rnd(10,90),y:rnd(30,88),r:rnd(-30,30)});return a;}
 function save(){try{S.lastSeen=Date.now();localStorage.setItem(SAVE_KEY,JSON.stringify(S));}catch(e){}}
-function hydrate(d){ const base=newState(); S=Object.assign(base,d); S.stats=Object.assign(base.stats,d.stats||{}); if(!d.lang)S.lang=detectLang(); S.lobby=Object.assign({plant:0,water:0,ring:false,ringAt:0},d.lobby||{}); if(!S.cleaners||typeof S.cleaners!=='object')S.cleaners={}; if(S.cleaner){S.cleaners[S.cleaner.floor]=S.cleaner;} S.cleaner=null; if(!Array.isArray(S.guestbook))S.guestbook=[]; if(!S.builds||typeof S.builds!=='object')S.builds={}; if(!S.wing||typeof S.wing!=='object')S.wing={}; if(!S.wingBuilds||typeof S.wingBuilds!=='object')S.wingBuilds={}; if(!Array.isArray(S.dailyLog))S.dailyLog=[]; const mk0=newState().mk; S.mk=Object.assign(mk0,d.mk||{}); S.mk.house=Object.assign(newState().mk.house,(d.mk||{}).house||{}); if(!Array.isArray(S.mk.pages))S.mk.pages=[]; S.col=Object.assign(newState().col,d.col||{}); ['pool','cinema','cellar','lf','jul','resto'].forEach(k=>{S[k]=Object.assign(base[k],d[k]||{});}); if(!S.facUps||typeof S.facUps!=='object')S.facUps={}; }
+function hydrate(d){ const base=newState(); S=Object.assign(base,d); S.stats=Object.assign(base.stats,d.stats||{}); if(!d.lang)S.lang=detectLang(); S.lobby=Object.assign({plant:0,water:0,ring:false,ringAt:0},d.lobby||{}); if(!S.cleaners||typeof S.cleaners!=='object')S.cleaners={}; if(S.cleaner){S.cleaners[S.cleaner.floor]=S.cleaner;} S.cleaner=null; if(!Array.isArray(S.guestbook))S.guestbook=[]; if(!S.builds||typeof S.builds!=='object')S.builds={}; if(!S.wing||typeof S.wing!=='object')S.wing={}; if(!S.wingBuilds||typeof S.wingBuilds!=='object')S.wingBuilds={}; for(const k in S.wingBuilds){const b=S.wingBuilds[k],w=(typeof WING!=='undefined')&&WING.find(x=>x.id===k);if(b&&w&&b.end-b.start>w.min*60000)b.end=b.start+w.min*60000;} if(!Array.isArray(S.dailyLog))S.dailyLog=[]; const mk0=newState().mk; S.mk=Object.assign(mk0,d.mk||{}); S.mk.house=Object.assign(newState().mk.house,(d.mk||{}).house||{}); if(!Array.isArray(S.mk.pages))S.mk.pages=[]; S.col=Object.assign(newState().col,d.col||{}); ['pool','cinema','cellar','lf','jul','resto'].forEach(k=>{S[k]=Object.assign(base[k],d[k]||{});}); if(!S.facUps||typeof S.facUps!=='object')S.facUps={}; }
 function load(){
   try{const raw=localStorage.getItem(SAVE_KEY); if(raw){hydrate(JSON.parse(raw)); return;}}catch(e){}
   S=newState();
@@ -1661,7 +1661,9 @@ function avatar(p,cls=''){
   if(p.style==='long') back=`<path d="M16 28 C13 46 17 54 22 56 L42 56 C47 54 51 46 48 28Z" fill="${hair}"/>`;
   if(p.style==='bun') back=`<circle cx="32" cy="11" r="7" fill="${hair}"/>`;
   if(p.style==='curly') front=[[19,24],[24,17],[32,14],[40,17],[45,24]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="6.5" fill="${hair}"/>`).join('');
-  else front=`<path d="M17.5 29 C16 15 48 15 46.5 29 C43 21 37 19.5 32 22 C27 19.5 21 22 17.5 29Z" fill="${hair}"/>`;
+  else front=`<path d="M17.5 30 C15 8 49 8 46.5 30 C43 21 37 19.5 32 22 C27 19.5 21 22 17.5 30Z" fill="${hair}"/>`;
+  if(p.style==='bob') back=`<path d="M16 28 C13 42 16 47 21 47 L43 47 C48 47 51 42 48 28Z" fill="${hair}"/>`;
+  if(p.style==='pigtails') back=`<circle cx="15" cy="33" r="6" fill="${hair}"/><circle cx="49" cy="33" r="6" fill="${hair}"/>`;
   if(p.acc==='glasses') acc+=`<g fill="none" stroke="${ink}" stroke-width="1.6"><rect x="22" y="26.5" width="8" height="6" rx="2"/><rect x="34" y="26.5" width="8" height="6" rx="2"/><path d="M30 29h4"/></g>`;
   if(p.acc==='roundglasses') acc+=`<g fill="none" stroke="${ink}" stroke-width="1.6"><circle cx="27" cy="30" r="4"/><circle cx="37" cy="30" r="4"/><path d="M31 30h2"/></g>`;
   if(p.acc==='chef') acc+=`<path d="M20 20 L44 20 L44 12 C48 6 41 1 37 5 C35 0 29 0 27 5 C22 1 15 7 20 12Z" fill="#fff" stroke="${ink}" stroke-width="1.5"/>`;
@@ -1986,7 +1988,7 @@ function hotelScene(){
          <div class="ground">
            <div class="lobby"><span class="lobby-title">Resepsjon</span>${julKrans()}<button class="btn small enter-lobby" data-act="go" data-arg="lobby">Gå inn ▸</button>
              <div class="desk"></div>
-             ${meFigure()}<button class="pern" data-act="talk" data-arg="pernille" title="Pernille">${npcAv('pernille')}${!S.talked.pernille?'<span class="ex">!</span>':''}</button>
+             <button class="pern" data-act="talk" data-arg="pernille" title="Pernille">${npcAv('pernille')}${!S.talked.pernille?'<span class="ex">!</span>':''}</button>
              ${recepChip()}<div class="queue">${q}</div>
            </div>
            <button class="resto" data-act="go" data-arg="restaurant"><span class="resto-title" style="background:var(--lingon)">Restaurant</span><small>Nivå ${S.restLvl}/${REST_MAX} · ${S.portions} porsjoner</small><span class="tables">🍽️🥞</span></button>
@@ -3017,13 +3019,13 @@ function awayIncome(){
 
 /* ---- Sjøfløyen: stor utbygging med ekte byggetid ---- */
 const WING=[
-  {id:'grunnmur',star:6,cost:5000,sol:0,min:30,no:'Sjøfløyen',en:'The Sea Wing',dno:'Grunnmur, to etasjer og to suiter med havutsikt.',den:'Foundations, two floors and two sea-view suites.',rooms:[1,2],bonus:0},
-  {id:'lounge',star:6,cost:3000,sol:0,min:20,no:'Loungen',en:'The lounge',dno:'Flygel, myke sofaer og varm kakao om kvelden.',den:'A grand piano, soft sofas and hot cocoa in the evening.',bonus:10,fun:true,need:'grunnmur'},
-  {id:'spa',star:7,cost:8000,sol:2,min:90,no:'Spa-hotellet',en:'The spa hotel',dno:'Varme kilder, badstue og massasje med havutsikt.',den:'Hot springs, a sauna and massages with a sea view.',bonus:14,fun:true,need:'grunnmur'},
-  {id:'suiter2',star:7,cost:6000,sol:0,min:60,no:'To nye suiter',en:'Two new suites',dno:'Enda to suiter i andre etasje.',den:'Two more suites on the second floor.',rooms:[3,4],bonus:0,need:'grunnmur'},
-  {id:'vinterhage',star:8,cost:10000,sol:3,min:120,no:'Vinterhagen',en:'The winter garden',dno:'Et glasshus på taket fullt av palmer, appelsintrær og fugler.',den:'A glasshouse on the roof full of palms, orange trees and birds.',bonus:12,fun:true,need:'grunnmur'},
-  {id:'ballsal',star:9,cost:14000,sol:4,min:180,no:'Ballsalen',en:'The ballroom',dno:'En tredje etasje med lysekroner, dansegulv og orkesterplass.',den:'A third floor with chandeliers, a dance floor and room for an orchestra.',bonus:16,fun:true,need:'grunnmur'},
-  {id:'toppsuite',star:10,cost:20000,sol:6,min:240,no:'Solglimt-suiten',en:'The Solglimt Suite',dno:'Tårnet med hotellets aller fineste suite og utsikt over hele øya.',den:'The tower with the hotel’s very finest suite and a view of the whole island.',rooms:[5],bonus:20,need:'ballsal'}
+  {id:'grunnmur',star:6,cost:5000,sol:0,min:5,no:'Sjøfløyen',en:'The Sea Wing',dno:'Grunnmur, to etasjer og to suiter med havutsikt.',den:'Foundations, two floors and two sea-view suites.',rooms:[1,2],bonus:0},
+  {id:'lounge',star:6,cost:3000,sol:0,min:4,no:'Loungen',en:'The lounge',dno:'Flygel, myke sofaer og varm kakao om kvelden.',den:'A grand piano, soft sofas and hot cocoa in the evening.',bonus:10,fun:true,need:'grunnmur'},
+  {id:'spa',star:7,cost:8000,sol:2,min:10,no:'Spa-hotellet',en:'The spa hotel',dno:'Varme kilder, badstue og massasje med havutsikt.',den:'Hot springs, a sauna and massages with a sea view.',bonus:14,fun:true,need:'grunnmur'},
+  {id:'suiter2',star:7,cost:6000,sol:0,min:8,no:'To nye suiter',en:'Two new suites',dno:'Enda to suiter i andre etasje.',den:'Two more suites on the second floor.',rooms:[3,4],bonus:0,need:'grunnmur'},
+  {id:'vinterhage',star:8,cost:10000,sol:3,min:12,no:'Vinterhagen',en:'The winter garden',dno:'Et glasshus på taket fullt av palmer, appelsintrær og fugler.',den:'A glasshouse on the roof full of palms, orange trees and birds.',bonus:12,fun:true,need:'grunnmur'},
+  {id:'ballsal',star:9,cost:14000,sol:4,min:15,no:'Ballsalen',en:'The ballroom',dno:'En tredje etasje med lysekroner, dansegulv og orkesterplass.',den:'A third floor with chandeliers, a dance floor and room for an orchestra.',bonus:16,fun:true,need:'grunnmur'},
+  {id:'toppsuite',star:10,cost:20000,sol:6,min:20,no:'Solglimt-suiten',en:'The Solglimt Suite',dno:'Tårnet med hotellets aller fineste suite og utsikt over hele øya.',den:'The tower with the hotel’s very finest suite and a view of the whole island.',rooms:[5],bonus:20,need:'ballsal'}
 ];
 const wingById=id=>WING.find(w=>w.id===id);
 const wingName=w=>S.lang==='en'?w.en:w.no;
@@ -3856,8 +3858,8 @@ RARES.push({id:'julestjerne',name:'Julestjernen',e:'⭐'});
    - Besøk andres hoteller med lenke/kode, eller søk dem opp på nett
    - Skriv hilsener i hverandres besøksbok (faste hilsener, ingen fritekst)
    ===================================================================== */
-const ONLINE_URL=''; // fylles inn med Netlify-adressen når søk er satt opp (for itch.io og appen)
-const ME_STYLES=['short','long','curly','bun'];
+const ONLINE_URL='https://hotellsolglimt.netlify.app'; // fylles inn med Netlify-adressen når søk er satt opp (for itch.io og appen)
+const ME_STYLES=['short','long','curly','bun','bob','pigtails'];
 const ME_ACCS=['','glasses','roundglasses','cap','band','bow','tiara','phones','pin','nightcap','sydvest','pearls'];
 const ME_SHIRTS=['#5fb9c6','#f2a234','#cf4a3e','#5c9a47','#6d4f93','#ee86b6','#2b6f78','#e3b53c','#fff8ec','#2b2540'];
 const ME_BGS=['#fff3d6','#e0f2f4','#fde4cf','#eaf6dd','#f2dcef','#d6eef1'];
