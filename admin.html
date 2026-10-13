@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Solglimt – Tilbakemeldinger</title>
+<style>
+@font-face{font-family:'Grandstander';src:url('grandstander.woff') format('woff');font-weight:100 900;font-display:swap}
+@font-face{font-family:'Nunito';src:url('nunito.woff') format('woff');font-weight:200 1000;font-display:swap}
+:root{--ink:#2b2540;--paper:#fff8ec;--line:#f6dcab;--accent:#cf4a3e;--teal:#2b6f78;--muted:#6b6478}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 'Nunito',system-ui,sans-serif;padding:24px 16px}
+main{max-width:760px;margin:0 auto}
+h1{font-family:'Grandstander','Trebuchet MS',sans-serif;color:var(--accent);margin:0 0 4px;font-size:30px}
+p.sub{color:var(--muted);font-weight:700;margin:0 0 20px}
+.card{border:3px solid var(--ink);border-radius:16px;background:#fff;padding:14px;margin-bottom:12px}
+label{font-weight:800;display:block;margin-bottom:6px}
+input{font:inherit;padding:10px 12px;border:3px solid var(--ink);border-radius:12px;width:100%;max-width:320px}
+button{font:inherit;font-weight:800;padding:9px 16px;border:3px solid var(--ink);border-radius:12px;background:#f2a234;color:var(--ink);cursor:pointer;margin-top:8px}
+button.soft{background:var(--paper)}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 14px}
+.filters button{margin:0;padding:6px 12px}
+.filters button.on{background:var(--teal);color:#fff}
+.fb{display:grid;gap:4px}
+.fb .meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:13px;font-weight:800;color:var(--muted)}
+.kind{border-radius:999px;padding:2px 10px;color:#fff;font-size:12px}
+.kind.feil{background:var(--accent)}.kind.onske{background:var(--teal)}.kind.ros{background:#5c9a47}
+.fb p{margin:0;white-space:pre-wrap;font-weight:600}
+.fb button{justify-self:start;padding:4px 10px;font-size:13px;margin-top:4px}
+.err{color:var(--accent);font-weight:800}
+.empty{color:var(--muted);font-weight:700}
+</style>
+</head>
+<body>
+<main>
+<h1>Tilbakemeldinger</h1>
+<p class="sub">Det spillerne har skrevet via 💬 i Solglimt Hotel.</p>
+<div id="app"></div>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let pw=sessionStorage.getItem('sgpw')||'', list=[], filter='alle';
+async function api(path,body){const r=await fetch('/api/'+path,body?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}:{});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.error||r.status);e.code=j.error;throw e;}return j;}
+async function start(){
+  let st; try{st=await api('adminstatus');}catch(e){$('#app').innerHTML='<p class="err">Fikk ikke kontakt med serveren. Er siden koblet til GitHub og Netlify?</p>';return;}
+  if(pw){try{await load();return;}catch(e){pw='';sessionStorage.removeItem('sgpw');}}
+  $('#app').innerHTML=`<div class="card"><label for="pw">${st.setup?'Passord':'Velg et passord (minst 6 tegn)'}</label><input id="pw" type="password" autocomplete="current-password"><br><button id="go">${st.setup?'Logg inn':'Lagre passordet'}</button><p id="msg" class="err"></p>${st.setup?'':'<p class="sub" style="margin-top:8px">Første gang du åpner siden, velger du et passord. Bare du kan se tilbakemeldingene etterpå.</p>'}</div>`;
+  $('#go').onclick=async()=>{pw=$('#pw').value;try{if(!st.setup)await api('admin',{op:'setup',password:pw});await load();sessionStorage.setItem('sgpw',pw);}catch(e){$('#msg').textContent=e.code==='short'?'Passordet må ha minst 6 tegn.':'Feil passord.';}};
+}
+async function load(){const r=await api('admin',{op:'list',password:pw});list=r.feedback||[];render();}
+function render(){
+  const k={feil:'🐞 Feil',onske:'💡 Ønske',ros:'❤️ Ros'};
+  const shown=list.filter(f=>filter==='alle'||f.kind===filter);
+  $('#app').innerHTML=`<div class="filters">${[['alle','Alle ('+list.length+')'],['feil','🐞 Feil'],['onske','💡 Ønsker'],['ros','❤️ Ros']].map(([id,t])=>`<button class="${filter===id?'on':''}" data-f="${id}">${t}</button>`).join('')}<button class="soft" id="refresh">↻ Oppdater</button></div>
+   ${shown.length?shown.map(f=>`<div class="card fb"><div class="meta"><span class="kind ${f.kind}">${k[f.kind]}</span><span>${f.name?esc(f.name):'Anonym'}</span><span>${'★'.repeat(Math.min(5,f.stars||0))}${f.stars>5?' +'+(f.stars-5):''}</span><span>${new Date(f.t).toLocaleString('no-NO')}</span></div><p>${esc(f.text)}</p><button class="soft" data-del="${f.t}">Slett</button></div>`).join(''):'<p class="empty">Ingen tilbakemeldinger her ennå.</p>'}`;
+  document.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{filter=b.dataset.f;render();});
+  $('#refresh').onclick=load;
+  document.querySelectorAll('[data-del]').forEach(b=>b.onclick=async()=>{await api('admin',{op:'delete',password:pw,t:+b.dataset.del});await load();});
+}
+start();
+</script>
+</body>
+</html>

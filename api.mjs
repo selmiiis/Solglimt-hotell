@@ -159,6 +159,44 @@ export default async (req) => {
       return json({ code: old.code, upd: old.upd });
     }
 
+    if (action === "feedback" && req.method === "POST") {
+      const kinds = ["feil", "onske", "ros"];
+      const kind = kinds.includes(body.kind) ? body.kind : "onske";
+      const text = String(body.text || "").replace(/[<>]/g, "").trim().slice(0, 600);
+      if (text.length < 3) return json({ error: "bad" }, 400);
+      const fb = getStore("feedback");
+      const list = (await fb.get("list", { type: "json" })) || [];
+      list.unshift({ kind, text, name: cleanName(body.name) || "", stars: Math.max(0, Math.min(10, +body.stars || 0)), day: +body.day || 0, lang: body.lang === "en" ? "en" : "no", t: Date.now() });
+      await fb.setJSON("list", list.slice(0, 500));
+      return json({ ok: true });
+    }
+
+    if (action === "admin" && req.method === "POST") {
+      const fb = getStore("feedback");
+      const pw = String(body.password || "");
+      if (pw.length < 6) return json({ error: "short" }, 400);
+      const stored = await fb.get("adminhash", { type: "json" });
+      const h = await sha("solglimt-admin:" + pw);
+      if (body.op === "setup") {
+        if (stored) return json({ error: "exists" }, 403);
+        await fb.setJSON("adminhash", { h });
+        return json({ ok: true });
+      }
+      if (!stored || stored.h !== h) return json({ error: "owner" }, 403);
+      if (body.op === "list") return json({ feedback: (await fb.get("list", { type: "json" })) || [] });
+      if (body.op === "delete") {
+        const list = (await fb.get("list", { type: "json" })) || [];
+        await fb.setJSON("list", list.filter((x) => x.t !== +body.t));
+        return json({ ok: true });
+      }
+      return json({ error: "bad" }, 400);
+    }
+
+    if (action === "adminstatus") {
+      const fb = getStore("feedback");
+      return json({ setup: !!(await fb.get("adminhash", { type: "json" })) });
+    }
+
     if (action === "report" && req.method === "POST") {
       const { id } = body;
       if (!validId(id)) return json({ error: "bad" }, 400);

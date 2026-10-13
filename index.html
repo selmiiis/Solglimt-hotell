@@ -794,6 +794,15 @@ button.prop:hover{transform:translate(-50%,-104%) scale(1.08)}
 .flag-garland i{width:20px;height:14px;display:block;animation:balloon 2.4s ease-in-out infinite}.flag-garland svg{width:100%;height:100%;border:1.5px solid var(--ink)}
 .cloud-code{font-family:ui-monospace,monospace;font-weight:800;font-size:17px;letter-spacing:1px;background:#fff7d6;border:2.5px dashed var(--ink);border-radius:10px;padding:8px 10px;word-break:break-all}
 .week-card{background:#fff7d6}
+
+#dialog:not([hidden]) ~ #tutBar{display:none}
+#tutBar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(92px + env(safe-area-inset-bottom,0px));z-index:36;width:min(620px,calc(100% - 24px));display:flex;gap:10px;align-items:center;background:#fff7d6;border:3px solid var(--ink);border-radius:16px;padding:8px 10px;box-shadow:0 4px 0 rgba(0,0,0,.2);animation:pop .25s}
+.tut-av{width:46px;height:46px;flex:none}.tut-av .av{width:100%;height:100%}
+.tut-tx{flex:1;display:grid;gap:1px}.tut-tx small{font-weight:800;color:#8a6a2a}.tut-tx b{font-size:14.5px;line-height:1.25}
+.tut-hl{outline:4px solid #f2a234!important;outline-offset:3px;animation:tutpulse 1.2s ease-in-out infinite!important;position:relative;z-index:3}
+@keyframes tutpulse{50%{outline-color:#f7c948;outline-offset:6px}}
+@media(max-width:560px){#tutBar{bottom:calc(84px + env(safe-area-inset-bottom,0px))}.tut-tx b{font-size:13px}}
+.news-list{display:grid;gap:6px}.news-row{display:flex;gap:10px;align-items:center;border:2.5px solid var(--ink);border-radius:12px;padding:6px 10px;background:var(--paper)}.news-row span{font-size:22px}
 </style>
 </head>
 <body>
@@ -1680,7 +1689,7 @@ function newState(){
     col:{skjell:[],postkort:[],gjester:[],dyr:[],fisk:[],sjeldne:[],bilder:[]},
     mk:{house:{kjokken:false,stue:false,loft:false,veranda:false},pages:[],signe:0,done:false,trips:0,rented:false},colClaimed:[],
     secrets:{},animals:{},visited:{},daily:{},talked:{},
-    pool:{fishDay:0,picked:[],found:[],specialDay:0,partyDay:0},cinema:{pick:null,shownDay:0,seen:[],popDay:0,served:[],wallDone:false},cellar:{rydd:false,bowling:false,clues:0,secret:false},facUps:{},lf:{met:false,paper:0,lanterns:0,found:[],done:0},jul:{doors:[],deco:{},eve:0},me:null,besoksbok:[],visitedHotels:[],weather:null,trophies:{},hunts:{},cloud:{on:false},marketBought:{},music:true,regs:{},keeper:{on:false},resto:{d:[],seq:0,next:0,today:0,day:0},
+    pool:{fishDay:0,picked:[],found:[],specialDay:0,partyDay:0},cinema:{pick:null,shownDay:0,seen:[],popDay:0,served:[],wallDone:false},cellar:{rydd:false,bowling:false,clues:0,secret:false},facUps:{},lf:{met:false,paper:0,lanterns:0,found:[],done:0},jul:{doors:[],deco:{},eve:0},me:null,besoksbok:[],visitedHotels:[],tut:{step:0},newsSeen:'',weather:null,trophies:{},hunts:{},cloud:{on:false},marketBought:{},music:true,regs:{},keeper:{on:false},resto:{d:[],seq:0,next:0,today:0,day:0},
     intro:false,cleaner:null,cleaners:{},recep:null,builds:{},guestbook:[],fbRecent:[],lobby:{plant:0,water:0,ring:false,ringAt:0},nextGuest:7*60+10,guestSeq:1,dayLog:{earned:0,out:0},scene:'hotell',palmTaps:0};
   for(let i=1;i<=3;i++) s.rooms.push(makeRoom(1,i));
   s.rooms[0].dirty=true; s.rooms[0].mess=genMess(6);
@@ -1689,7 +1698,7 @@ function newState(){
 }
 function genMess(n){const m=['🧦','🍌','📰','🥤','🍂','🧻','🍪','👕'];const a=[];for(let i=0;i<n;i++)a.push({e:pick(m),x:rnd(10,90),y:rnd(30,88),r:rnd(-30,30)});return a;}
 function save(){try{S.lastSeen=Date.now();localStorage.setItem(SAVE_KEY,JSON.stringify(S));}catch(e){}}
-function hydrate(d){ const base=newState(); S=Object.assign(base,d); S.stats=Object.assign(base.stats,d.stats||{}); if(!d.lang)S.lang=detectLang(); S.lobby=Object.assign({plant:0,water:0,ring:false,ringAt:0},d.lobby||{}); if(!S.cleaners||typeof S.cleaners!=='object')S.cleaners={}; if(S.cleaner){S.cleaners[S.cleaner.floor]=S.cleaner;} S.cleaner=null; if(!Array.isArray(S.guestbook))S.guestbook=[]; if(!S.builds||typeof S.builds!=='object')S.builds={}; if(!S.wing||typeof S.wing!=='object')S.wing={}; if(!S.wingBuilds||typeof S.wingBuilds!=='object')S.wingBuilds={}; for(const k in S.wingBuilds){const b=S.wingBuilds[k],w=(typeof WING!=='undefined')&&WING.find(x=>x.id===k);if(b&&w&&b.end-b.start>w.min*60000)b.end=b.start+w.min*60000;} if(!Array.isArray(S.dailyLog))S.dailyLog=[]; const mk0=newState().mk; S.mk=Object.assign(mk0,d.mk||{}); S.mk.house=Object.assign(newState().mk.house,(d.mk||{}).house||{}); if(!Array.isArray(S.mk.pages))S.mk.pages=[]; S.col=Object.assign(newState().col,d.col||{}); ['pool','cinema','cellar','lf','jul','resto'].forEach(k=>{S[k]=Object.assign(base[k],d[k]||{});}); if(!S.facUps||typeof S.facUps!=='object')S.facUps={}; }
+function hydrate(d){ const base=newState(); S=Object.assign(base,d); if(!d.tut) S.tut={step:((d.stats&&d.stats.checkouts)||0)>0?99:0}; S.stats=Object.assign(base.stats,d.stats||{}); if(!d.lang)S.lang=detectLang(); S.lobby=Object.assign({plant:0,water:0,ring:false,ringAt:0},d.lobby||{}); if(!S.cleaners||typeof S.cleaners!=='object')S.cleaners={}; if(S.cleaner){S.cleaners[S.cleaner.floor]=S.cleaner;} S.cleaner=null; if(!Array.isArray(S.guestbook))S.guestbook=[]; if(!S.builds||typeof S.builds!=='object')S.builds={}; if(!S.wing||typeof S.wing!=='object')S.wing={}; if(!S.wingBuilds||typeof S.wingBuilds!=='object')S.wingBuilds={}; for(const k in S.wingBuilds){const b=S.wingBuilds[k],w=(typeof WING!=='undefined')&&WING.find(x=>x.id===k);if(b&&w&&b.end-b.start>w.min*60000)b.end=b.start+w.min*60000;} if(!Array.isArray(S.dailyLog))S.dailyLog=[]; const mk0=newState().mk; S.mk=Object.assign(mk0,d.mk||{}); S.mk.house=Object.assign(newState().mk.house,(d.mk||{}).house||{}); if(!Array.isArray(S.mk.pages))S.mk.pages=[]; S.col=Object.assign(newState().col,d.col||{}); ['pool','cinema','cellar','lf','jul','resto'].forEach(k=>{S[k]=Object.assign(base[k],d[k]||{});}); if(!S.facUps||typeof S.facUps!=='object')S.facUps={}; }
 function load(){
   try{const raw=localStorage.getItem(SAVE_KEY); if(raw){hydrate(JSON.parse(raw)); return;}}catch(e){}
   S=newState();
@@ -1898,6 +1907,7 @@ function tick(){
   if(S.lobby.ring&&abs-S.lobby.ringAt>90){S.lobby.ring=false;structural=true;}
   if(tickCleaner())structural=true;
   if(tickRecep())structural=true;
+  if(tutActive()){tutCheck();if(saveCount%2===0)tutRender();}
   if(ensureWeather())structural=true;
   if(surpriseTick())structural=true;
   if(saveCount%10===5)trophyTick();
@@ -1970,7 +1980,7 @@ function renderScene(soft){
   if(soft&&currentSceneKey===sc){el.scrollTop=scroll;}else{el.classList.add('scene-in');}
   currentSceneKey=sc;
   if(capHtml){const c=$('#lookCap');if(c){c.innerHTML=capHtml;c.hidden=false;}}
-  lfInject(sc); huntInject(sc);
+  lfInject(sc); huntInject(sc); if(typeof tutRender==='function')setTimeout(tutRender,0);
 }
 
 /* ---- KART ---- */
@@ -2050,7 +2060,7 @@ function hotelScene(){
   return `<div class="scene hotel-scene ph-${ph}">
    <div class="hotel-sky sky">
      <div class="celestial"></div><div class="cloud" style="top:40px;left:8%;width:60px"></div><div class="cloud" style="top:90px;left:70%;width:46px;animation-duration:55s"></div>
-     ${autumnLeaves()}${snowFall()}${weatherFX()}<div class="hotel-top">${cta}${meBanner()}${lfCard()}${julCard()}${huntCard()}</div>
+     ${autumnLeaves()}${snowFall()}${weatherFX()}<div class="hotel-top">${cta}${tutActive()?'':meBanner()+lfCard()+julCard()+huntCard()}</div>
      ${addFloor}
      <div class="building st${Math.min(st,5)} ${st>=6?'gold':''} ${julActive()&&julDeco('lys')?'jul-lys':''}">${lfGarland()}${flagsGarland()}${julRoof()}
        <div class="roof">${flags}${terrace}<div class="sign">${st>=10?'Solglimt Grand':'Solglimt Hotel'}<small>${hotelStarsShort(st)}</small></div></div>
@@ -4990,6 +5000,88 @@ function cloudCard(){
 }
 function cloudTick(){ if(S.cloud&&S.cloud.on&&saveCount%600===300&&Date.now()-(S.cloud.at||0)>4*60*1000) cloudUpload(true); }
 
+/* =====================================================================
+   NY SPILLER-INNFØRING, NYHETER OG TILBAKEMELDINGER
+   ===================================================================== */
+
+/* ---------------- INNFØRING: Tiril viser én ting om gangen ---------------- */
+const TUT=[
+  {no:'Trykk på gjesten i resepsjonen, og gi henne et rom med seng.',en:'Tap the guest at reception and give them a room with a bed.',done:()=>S.stats.checkins>=1,sel:['.qg','.lq']},
+  {no:'Gjesten bor på rommet en liten stund. Når det står «Sjekk ut», trykker du på rommet og tar imot betalingen.',en:'The guest stays in the room for a little while. When it says “Check out”, tap the room and take the payment.',done:()=>S.stats.checkouts>=1,sel:['.room-card:has(.rc-state.ready)']},
+  {no:'Rommet ble rotete etter gjesten. Trykk på det og rydd, så kan nye gjester bo der.',en:'The room got messy after the guest. Tap it and tidy up so new guests can stay there.',done:()=>S.stats.cleaned>=1,sel:['.room-card:has(.rc-state.dirty)','.mess']},
+  {no:'Gjør et rom finere: trykk på et rom og kjøp et møbel. Mer komfort gir gladere gjester og mer betalt.',en:'Make a room nicer: tap a room and buy a piece of furniture. More comfort means happier guests and better pay.',done:()=>(S.stats.bought||0)>=1,sel:['.room-card','.slot.empty']},
+  {no:'Noen gjester blir sultne. Gå til restauranten og lag mat.',en:'Some guests get hungry. Go to the restaurant and cook.',done:()=>S.stats.cooked>=1,sel:['.resto','[data-act=cook]']},
+  {no:'Øya har mye å by på! Åpne kartet og besøk et sted.',en:'The island has lots to offer! Open the map and visit a place.',done:()=>S.stats.visits>=1,sel:['#nav-kart','.area-card:not(.locked)']}
+];
+function tutActive(){return S&&S.intro&&S.tut&&S.tut.step<TUT.length;}
+function tutCheck(){
+  if(!tutActive()) return false; let moved=false;
+  while(S.tut.step<TUT.length&&TUT[S.tut.step].done()){S.tut.step++;moved=true;}
+  if(moved){
+    sfx('good');
+    if(S.tut.step>=TUT.length){addCoins(100);setTimeout(()=>say('tiril',[L('Nå kan du det viktigste! Her er 100 mynter til å komme i gang.','Now you know the basics! Here are 100 coins to get you going.'),L('Lurer du på noe, trykker du på lyspæra 💡 øverst. Da sier jeg hva som er lurt å gjøre.','If you’re ever unsure, tap the light bulb 💡 at the top. I’ll tell you what’s a good idea.')]),400);}
+    save(); tutRender();
+  }
+  return moved;
+}
+function tutRender(){
+  document.querySelectorAll('.tut-hl').forEach(e=>e.classList.remove('tut-hl'));
+  let bar=document.getElementById('tutBar');
+  if(!tutActive()){ if(bar) bar.remove(); return; }
+  const t0=TUT[S.tut.step]; const t=(S.tut.step===0&&!S.queue.length)?{no:'Den første gjesten er på vei! Når hun står i resepsjonen, trykker du på henne og gir henne et rom med seng.',en:'The first guest is on the way! When they’re at reception, tap them and give them a room with a bed.',sel:t0.sel}:t0;
+  if(!bar){bar=document.createElement('div');bar.id='tutBar';document.getElementById('app')?document.getElementById('app').appendChild(bar):document.body.appendChild(bar);}
+  bar.innerHTML=`<span class="tut-av">${npcAv('tiril')}</span><div class="tut-tx"><small>${L('Steg','Step')} ${S.tut.step+1}/${TUT.length}</small><b>${esc(L(t.no,t.en))}</b></div><button class="btn small soft" data-act="tutSkip">${L('Hopp over','Skip')}</button>`;
+  for(const sel of t.sel){ let el=null; try{el=document.querySelector(sel);}catch(e){} if(el&&el.offsetParent!==null){el.classList.add('tut-hl');break;} }
+}
+function tutSkip(){S.tut.step=TUT.length;save();tutRender();toast(L('Innføringen er hoppet over. Lyspæra 💡 øverst gir deg tips.','Tutorial skipped. The light bulb 💡 at the top gives you tips.'));}
+
+/* ---------------- NYHETER ETTER OPPDATERINGER ---------------- */
+const NEWS_VER='2026-10-13';
+const NEWS=[
+  ['🏆','Trofehylla med 33 trofeer','A trophy shelf with 33 trophies'],
+  ['🌦️','Vær og overraskelser: regn, storm, kjendiser og turistbåter','Weather and surprises: rain, storms, celebrities and tourist boats'],
+  ['🖌️','Tapet og gulv i rommene','Wallpaper and floors in the rooms'],
+  ['✨','Luksusmøbler: over 150 i komfort','Luxury furniture: over 150 comfort'],
+  ['🍽️','Ny restaurant med bordservering og 8 nivåer','A new restaurant with table service and 8 levels'],
+  ['📖','Faste gjester med egne historier','Regular guests with their own stories'],
+  ['🏘️','Besøk venner, gi hjerter og send gaver','Visit friends, give hearts and send presents'],
+  ['🛍️','Markedet i Kanelby med sjeldne møbler','The Kanelby market with rare furniture'],
+  ['☁️','Lagring på nett under ⚙️ Innstillinger','Online saving under ⚙️ Settings']
+];
+function newsSheet(){
+  S.newsSeen=NEWS_VER; save();
+  return {title:L('Nytt på Solglimt!','New at Solglimt!'),icon:'📰',body:`<div class="row"><span style="width:64px">${npcAv('tiril')}</span><p style="flex:1;font-weight:700">${L('Velkommen tilbake! Mens du var borte, har vi pusset opp. Her er det nyeste:','Welcome back! While you were away, we did some renovating. Here’s what’s new:')}</p></div>
+   <div class="news-list">${NEWS.map(([e,no,en])=>`<div class="news-row"><span>${e}</span><b>${esc(L(no,en))}</b></div>`).join('')}</div>
+   <button class="btn big green" data-act="closeSheet">${L('Så gøy!','How fun!')}</button>`};
+}
+function newsCheck(){
+  if(!S.intro) return;
+  if(S.newsSeen===NEWS_VER) return;
+  if((S.stats.checkouts||0)<3){S.newsSeen=NEWS_VER;save();return;} // nye spillere trenger ikke nyheter
+  setTimeout(()=>{if(document.getElementById('sheet').hidden&&document.getElementById('dialog').hidden)openSheet('news');},1400);
+}
+
+/* ---------------- TILBAKEMELDINGER ---------------- */
+function feedbackSheet(){
+  const k=ui.fbKind||'onske', res=ui.fbResult;
+  const kinds=[['feil','🐞',L('Feil','Bug')],['onske','💡',L('Ønske','Wish')],['ros','❤️',L('Ros','Praise')]];
+  return {title:L('Gi tilbakemelding','Send feedback'),icon:'💬',body:res?res:`<p class="muted" style="font-weight:700">${L('Fant du en feil, har du en idé, eller er det noe du liker? Skriv det her, så leser utvikleren det.','Found a bug, have an idea, or is there something you love? Write it here and the developer will read it.')}</p>
+   <div class="row" style="gap:6px">${kinds.map(([id,e,t])=>`<button class="btn small ${k===id?'blue':'soft'}" data-act="fbKind" data-arg="${id}">${e} ${t}</button>`).join('')}</div>
+   <textarea id="fbText" class="codebox" rows="5" maxlength="600" placeholder="${L('Skriv her …','Write here …')}">${esc(ui.fbDraft||'')}</textarea>
+   <small class="muted" style="font-weight:700">${L('Ikke skriv adressen, telefonnummeret eller andre private ting.','Don’t write your address, phone number or other private things.')}</small>
+   <button class="btn big green" data-act="fbSend">${L('Send','Send')}</button>`};
+}
+async function sendFeedback(){
+  const text=((document.getElementById('fbText')||{}).value||'').trim().slice(0,600);
+  if(text.length<3){toast(L('Skriv litt mer først.','Write a little more first.'));return;}
+  const m=ensureMe();
+  const body={kind:ui.fbKind||'onske',text,name:m.made?m.name:'',stars:S.stars,day:S.day,lang:S.lang,ver:NEWS_VER};
+  try{await api('feedback',{method:'POST',body:JSON.stringify(body)});ui.fbDraft='';ui.fbResult=`<p class="tag ok" style="font-size:15px">${L('Takk! Tilbakemeldingen er sendt.','Thank you! Your feedback has been sent.')}</p><button class="btn big" data-act="closeSheet">${L('Lukk','Close')}</button>`;sfx('good');S.stats.feedback=(S.stats.feedback||0)+1;save();}
+  catch(e){ui.fbResult=`<p style="font-weight:700">${L('Fikk ikke sendt akkurat nå. Prøv igjen senere, eller spill på nettsiden.','Couldn’t send right now. Try again later, or play on the website.')}</p><button class="btn" data-act="fbRetry">${L('Prøv igjen','Try again')}</button>`;}
+  refreshSheet();
+}
+document.addEventListener('input',e=>{if(e.target&&e.target.id==='fbText')ui.fbDraft=e.target.value;});
+
 const CLEAN_MIN=20; // spillminutter per rom for ryddehjelpen
 const floorName=f=>FLOORS[f].name?(S.lang==='en'?tr(FLOORS[f].name):FLOORS[f].name):L(f+'. etasje',['','1st','2nd','3rd'][f]?['','1st','2nd','3rd'][f]+' floor':f+'th floor');
 const CLEAN_MULTI_STAR=5; // fra 5 stjerner: én ryddehjelp i hver etasje samtidig
@@ -5175,6 +5267,8 @@ const SHEETS={
   ansgarRoom(){return ansgarRoomSheet();},
   lykt(){return lfSheet();},
   jul(){return julSheet();},
+  news(){return newsSheet();},
+  feedback(){return feedbackSheet();},
   trophies(){return trophySheet();},
   hunt(){return huntSheet();},
   market(){return marketSheet();},
@@ -5300,6 +5394,7 @@ const SHEETS={
   settings(){
     return {title:'Innstillinger',icon:'⚙️',body:`<div class="card"><b>🎵 ${L('Musikk','Music')}</b><div class="row" style="margin-top:8px"><button class="btn small ${S.music!==false?'green':'soft'}" data-act="music">${S.music!==false?L('Musikken er på','Music is on'):L('Musikken er av','Music is off')}</button><small class="muted" style="font-weight:700">${L('Lyd-knappen øverst slår av både lyd og musikk.','The sound button at the top turns off both sound and music.')}</small></div></div><div class="card"><b>Språk / Language</b><div class="row" style="margin-top:8px"><button class="btn small ${S.lang==='no'?'':'soft'}" data-act="lang" data-arg="no">Norsk</button><button class="btn small ${S.lang==='en'?'':'soft'}" data-act="lang" data-arg="en">English</button></div></div><div class="row"><button class="btn soft" data-act="sound">${S.sound?'🔊 Lyd på':'🔇 Lyd av'}</button><button class="btn soft" data-act="pause">${paused?'▶ Fortsett tiden':'⏸ Sett tiden på pause'}</button></div>
       <p class="muted" style="font-weight:700">Spillet lagres automatisk i denne nettleseren.</p>
+      <div class="card"><b>💬 ${L('Tilbakemelding og nyheter','Feedback and news')}</b><div class="row" style="margin-top:8px"><button class="btn small blue" data-act="openFeedback">${L('Gi tilbakemelding','Send feedback')}</button><button class="btn small soft" data-act="sheet" data-arg="news">📰 ${L('Se hva som er nytt','See what’s new')}</button>${S.tut&&S.tut.step>=TUT.length?`<button class="btn small soft" data-act="tutRestart">${L('Vis innføringen igjen','Show the tutorial again')}</button>`:''}</div></div>
       ${cloudCard()}
       ${saveCodeCard()}
       <div class="card"><b>Start på nytt</b><p class="muted" style="font-weight:600">Sletter all fremgang i denne nettleseren.</p><div class="row" style="margin-top:8px">${ui.resetArm?`<button class="btn red" data-act="resetDo">Ja, slett alt</button><button class="btn soft" data-act="resetCancel">Avbryt</button>`:`<button class="btn soft" data-act="resetArm">Start på nytt …</button>`}</div></div>
@@ -5353,7 +5448,7 @@ const ACT={
   },
   room(id){ui.pick=null;openSheet('room',+id);},
   slot(a){const [id,k]=a.split('|');ui.pick=ui.pick===k?null:k;sfx('click');refreshSheet();},
-  buy(a){const [id,fid]=a.split('|');const r=room(id),f=FURN[fid];if(f.lux&&!r.lux){toast(L('Dette møbelet passer bare i luksusrom.','This furniture only fits in luxury rooms.'));return;}if(!spend(f.price,f.sol))return;
+  buy(a){const [id,fid]=a.split('|');const r=room(id),f=FURN[fid];S.stats.bought=(S.stats.bought||0)+1;if(f.lux&&!r.lux){toast(L('Dette møbelet passer bare i luksusrom.','This furniture only fits in luxury rooms.'));return;}if(!spend(f.price,f.sol))return;
     if(r.slots[f.slot])S.inv[r.slots[f.slot]]=(S.inv[r.slots[f.slot]]||0)+1;
     r.slots[f.slot]=fid;floatText(`♥ +${f.comfort}`);sfx('good');afterRoomChange(r);},
   place(a){const [id,fid]=a.split('|');const r=room(id),f=FURN[fid];if(!S.inv[fid])return;if(f.lux&&!r.lux){toast(L('Dette møbelet passer bare i luksusrom.','This furniture only fits in luxury rooms.'));return;}S.inv[fid]--;
@@ -5371,7 +5466,7 @@ const ACT={
   posterReward(){if(S.cinema.wallDone||S.cinema.seen.length<CINEMA_FILMS.length)return;S.cinema.wallDone=true;addSol(2);confetti();refreshSheet();save();},
   cellarStep(id){cellarStep(id);},cellarTalk(){cellarTalk();},clook(id){showLook(cellarLook(id));},
   ansgarBrick(){ansgarBrick();},ansgarClue(){ansgarClue();},ansgarShelf(){ansgarShelf();},
-  lfFind(sc){lfFind(sc);},fixLeak(id){fixLeak(id);},huntFind(sc){huntFind(sc);},huntDone(){huntDone();},buyMarket(id){buyMarket(id);},cloudNow(){cloudUpload(false);},cloudFetch(){cloudFetch();},weatherInfo(){const w=WEATHER[wType()];showLook?toast(L(w.tipNo,w.tipEn)):0;},hireKeeper(){hireKeeper();},fireKeeper(){fireKeeper();},hint(){showHint();},music(){S.music=S.music===false;refreshSheet();save();},giveHeart(){giveHeart();},openGift(){ui.giftResult=null;openSheet('gift');},sendGift(id){sendGift(id);},buyDecor(a){buyDecor(a);},rsServe(id){rsServe(id);},rlook(id){showLook(restoLook(id));},
+  lfFind(sc){lfFind(sc);},tutSkip(){tutSkip();},tutRestart(){S.tut={step:0};closeSheet();tutCheck();tutRender();save();},fbKind(k){ui.fbKind=k;refreshSheet();},fbSend(){sendFeedback();},fbRetry(){ui.fbResult=null;refreshSheet();},openFeedback(){ui.fbResult=null;openSheet('feedback');},fixLeak(id){fixLeak(id);},huntFind(sc){huntFind(sc);},huntDone(){huntDone();},buyMarket(id){buyMarket(id);},cloudNow(){cloudUpload(false);},cloudFetch(){cloudFetch();},weatherInfo(){const w=WEATHER[wType()];showLook?toast(L(w.tipNo,w.tipEn)):0;},hireKeeper(){hireKeeper();},fireKeeper(){fireKeeper();},hint(){showHint();},music(){S.music=S.music===false;refreshSheet();save();},giveHeart(){giveHeart();},openGift(){ui.giftResult=null;openSheet('gift');},sendGift(id){sendGift(id);},buyDecor(a){buyDecor(a);},rsServe(id){rsServe(id);},rlook(id){showLook(restoLook(id));},
   meSet(a){meSet(a);},meDone(){meDone();},closeVisit(){closeVisit();},vroom(i){openSheet('vroom',i);},vgreet(i){sendGreet(i);},vreport(){reportVisit();},
   hSearch(){searchHotels();},pubHotel(){publishHotel(false);},unpubHotel(){unpublishHotel();},visitOnline(id){visitOnline(id);},visitCodeAgain(id){visitCodeAgain(id);},
   makeVisit(){makeVisitLink();},visitCode(){visitFromCode();},copyText(id){copyText(id);},
@@ -5699,6 +5794,7 @@ const __away=S.intro?awayIncome():(S.lastSeen=Date.now(),null); const __done=tic
 renderScene(); renderHUD();
 if(__away||__done.length) setTimeout(()=>openSheet('away',Object.assign({mins:0,coins:0},__away||{},{done:__done})),600);
 if(!S.intro){ if(S.talked&&Object.keys(S.talked).length){S.intro=true;} else startIntro(); }
+newsCheck();
 setInterval(tick,500);
 setTimeout(()=>{handleHash();fetchGreetings();},900);
 addEventListener('visibilitychange',()=>{if(document.hidden){save();return;}const a=awayIncome();const d=tickWing(true);if(a||d.length){renderScene(true);renderHUD();openSheet('away',Object.assign({mins:0,coins:0},a||{},{done:d}));save();}});
