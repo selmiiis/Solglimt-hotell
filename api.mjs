@@ -23,6 +23,9 @@ async function sha(s) {
   const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
   return [...new Uint8Array(b)].map((x) => x.toString(16).padStart(2, "0")).join("");
 }
+const GIFTS = ["blomst","kake","maleri","plante","bamse","lykt"];
+const today = () => new Date().toISOString().slice(0, 10);
+const weekKey = () => Math.floor((Date.now() / 86400000 + 3) / 7); // uker som starter mandag
 const LOOK_KEYS = ["skin","hair","style","shirt","acc","bg","stache"];
 const cleanLook = (l) => {
   const o = {};
@@ -36,6 +39,7 @@ export default async (req) => {
   const action = url.pathname.replace(/^.*\/api\/?/, "").split("/")[0];
   const hotels = getStore("hotels");
   const greets = getStore("greetings");
+  const saves = getStore("saves");
   const body = req.method === "POST" ? await req.json().catch(() => ({})) : {};
 
   try {
@@ -52,9 +56,9 @@ export default async (req) => {
       const hash = await sha(secret);
       if (old && old.hash !== hash) return json({ error: "owner" }, 403);
       const clean = { ...snap, n: name, l: cleanLook(snap.l) };
-      await hotels.setJSON("h/" + id, { hash, snap: clean, upd: Date.now(), reports: old ? old.reports || 0 : 0 });
+      await hotels.setJSON("h/" + id, { hash, snap: clean, upd: Date.now(), reports: old ? old.reports || 0 : 0, hearts: old ? old.hearts || 0 : 0, hb: old ? old.hb || {} : {} });
       const index = (await hotels.get("index", { type: "json" })) || [];
-      const entry = { id, n: name, l: clean.l, st: Math.max(1, Math.min(10, +snap.st || 1)), upd: Date.now() };
+      const entry = { id, n: name, l: clean.l, st: Math.max(1, Math.min(10, +snap.st || 1)), upd: Date.now(), hearts: old ? old.hearts || 0 : 0 };
       const next = [entry, ...index.filter((h) => h.id !== id)].slice(0, 3000);
       await hotels.setJSON("index", next);
       return json({ ok: true, name });
@@ -77,7 +81,16 @@ export default async (req) => {
       const hidden = (await hotels.get("hidden", { type: "json" })) || [];
       let list = index.filter((h) => !hidden.includes(h.id));
       if (q) list = list.filter((h) => h.n.toLowerCase().includes(q));
-      return json({ hotels: list.slice(0, 24).map(({ id, n, l, st }) => ({ id, n, l, st })) });
+      return json({ hotels: list.slice(0, 24).map(({ id, n, l, st, hearts }) => ({ id, n, l, st, hearts: hearts || 0 })) });
+    }
+
+    if (action === "top") {
+      const index = (await hotels.get("index", { type: "json" })) || [];
+      const hidden = (await hotels.get("hidden", { type: "json" })) || [];
+      const list = index.filter((h) => !hidden.includes(h.id) && (h.hearts || 0) > 0).sort((a, b) => (b.hearts || 0) - (a.hearts || 0));
+      const wk = weekKey();
+      const wl = index.filter((h) => !hidden.includes(h.id) && h.wkw === wk && h.wkn > 0).sort((a, b) => b.wkn - a.wkn)[0];
+      return json({ hotels: list.slice(0, 10).map(({ id, n, l, st, hearts }) => ({ id, n, l, st, hearts: hearts || 0 })), week: wl ? { id: wl.id, n: wl.n, l: wl.l, wkn: wl.wkn } : null });
     }
 
     if (action === "hotel") {
@@ -86,17 +99,18 @@ export default async (req) => {
       const h = await hotels.get("h/" + id, { type: "json" });
       const hidden = (await hotels.get("hidden", { type: "json" })) || [];
       if (!h || hidden.includes(id)) return json({ error: "missing" }, 404);
-      return json({ snap: h.snap });
+      return json({ snap: h.snap, hearts: h.hearts || 0 });
     }
 
     if (action === "greet" && req.method === "POST") {
-      const { to, fn, fl, m, t, fid } = body;
+      const { to, fn, fl, m, t, fid, gift } = body;
       if (!validId(to) || typeof m !== "number" || m < 0 || m > 30) return json({ error: "bad" }, 400);
+      if (gift != null && !GIFTS.includes(gift)) return json({ error: "bad" }, 400);
       const exists = await hotels.get("h/" + to, { type: "json" });
       if (!exists) return json({ error: "missing" }, 404);
       const list = (await greets.get("g/" + to, { type: "json" })) || [];
-      if (fid && list.some((g) => g.fid === fid && Date.now() - g.t < 60 * 60 * 1000)) return json({ ok: true, dup: true }); // én hilsen i timen per besøkende
-      list.unshift({ fn: cleanName(fn) || "En gjest", fl: cleanLook(fl), m, t: Math.min(Date.now(), +t || Date.now()), fid: validId(fid) ? fid : null });
+      if (fid && list.some((g) => g.fid === fid && !!g.gift === !!gift && Date.now() - g.t < (gift ? 20 : 1) * 60 * 60 * 1000)) return json({ ok: true, dup: true }); // én hilsen i timen og én gave i døgnet per besøkende
+      list.unshift({ fn: cleanName(fn) || "En gjest", fl: cleanLook(fl), m, t: Math.min(Date.now(), +t || Date.now()), fid: validId(fid) ? fid : null, gift: gift || null });
       await greets.setJSON("g/" + to, list.slice(0, 60));
       return json({ ok: true });
     }
@@ -107,7 +121,42 @@ export default async (req) => {
       const h = await hotels.get("h/" + id, { type: "json" });
       if (!h || h.hash !== (await sha(secret))) return json({ error: "owner" }, 403);
       const list = (await greets.get("g/" + id, { type: "json" })) || [];
-      return json({ greetings: list.map(({ fn, fl, m, t }) => ({ fn, fl, m, t })) });
+      return json({ hearts: h.hearts || 0, greetings: list.map(({ fn, fl, m, t, gift }) => ({ fn, fl, m, t, gift: gift || null })) });
+    }
+
+    if (action === "heart" && req.method === "POST") {
+      const { to, fid } = body;
+      if (!validId(to) || !validId(fid) || to === fid) return json({ error: "bad" }, 400);
+      const h = await hotels.get("h/" + to, { type: "json" });
+      if (!h) return json({ error: "missing" }, 404);
+      const d = today(); h.hb = h.hb || {};
+      if (h.hb[fid] === d) return json({ ok: true, dup: true, hearts: h.hearts || 0 });
+      h.hb[fid] = d; h.hearts = (h.hearts || 0) + 1;
+      const wk = weekKey(); h.wk = h.wk === wk ? h.wk : wk; h.wkn = (h.wkw === wk ? h.wkn || 0 : 0) + 1; h.wkw = wk;
+      const keys = Object.keys(h.hb); if (keys.length > 400) for (const k of keys.slice(0, keys.length - 400)) delete h.hb[k];
+      await hotels.setJSON("h/" + to, h);
+      const index = (await hotels.get("index", { type: "json" })) || [];
+      const e = index.find((x) => x.id === to); if (e) { e.hearts = h.hearts; e.wkw = h.wkw; e.wkn = h.wkn; await hotels.setJSON("index", index); }
+      return json({ ok: true, hearts: h.hearts });
+    }
+
+    if (action === "cloudsave" && req.method === "POST") {
+      const { id, secret, code } = body;
+      if (!validId(id) || typeof secret !== "string" || secret.length < 10 || typeof code !== "string" || !/^SGH[01]\./.test(code) || code.length > 500000) return json({ error: "bad" }, 400);
+      const hash = await sha(secret);
+      const old = await saves.get("s/" + id, { type: "json" });
+      if (old && old.hash !== hash) return json({ error: "owner" }, 403);
+      await saves.setJSON("s/" + id, { hash, code, upd: Date.now() });
+      return json({ ok: true });
+    }
+
+    if (action === "cloudload" && req.method === "POST") {
+      const { id, secret } = body;
+      if (!validId(id)) return json({ error: "bad" }, 400);
+      const old = await saves.get("s/" + id, { type: "json" });
+      if (!old) return json({ error: "missing" }, 404);
+      if (old.hash !== (await sha(String(secret || "")))) return json({ error: "owner" }, 403);
+      return json({ code: old.code, upd: old.upd });
     }
 
     if (action === "report" && req.method === "POST") {

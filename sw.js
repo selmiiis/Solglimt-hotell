@@ -1,5 +1,5 @@
-// Solglimt Hotel – service worker (offline-støtte). Versjon 88a76043
-const CACHE='solglimt-88a76043';
+// Solglimt Hotel – service worker (offline-støtte). Versjon 541bb91e
+const CACHE='solglimt-541bb91e';
 const FILES=["./", "index.html", "manifest.webmanifest", "personvern.html", "nunito.woff", "grandstander.woff", "icon-192.png", "icon-512.png", "maskable-192.png", "maskable-512.png", "apple-touch-icon.png", "favicon-32.png"];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
