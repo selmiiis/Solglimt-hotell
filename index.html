@@ -787,7 +787,8 @@ button.prop:hover{transform:translate(-50%,-104%) scale(1.08)}
 .rain.storm{background:rgba(40,50,80,.12)}.rain.storm i{transform:rotate(14deg);height:24px}
 @keyframes rainfall{to{transform:translateY(110vh)}}
 .weather-chip{cursor:pointer;border:none;font:inherit;font-weight:800}
-.rc-leak{position:absolute;left:34px;top:4px;font-size:16px;animation:pulse 1.4s ease-in-out infinite}
+.rc-leak{position:absolute;left:34px;top:0;font-size:20px;padding:2px 4px;cursor:pointer;z-index:8;animation:pulse 1.4s ease-in-out infinite}
+.leak-box{display:flex;gap:10px;align-items:center;flex-wrap:wrap;width:100%;background:#e3f2fb;border:3px solid var(--ink);border-radius:14px;padding:8px 12px;margin:2px 0 6px}.leak-box small{display:block;font-weight:700;color:var(--muted)}
 .hunt-banner{background:#5c9a47}
 .hunt-dot{width:30px;height:30px;border:2.5px dashed var(--ink);border-radius:50%;display:grid;place-items:center;font-size:16px;background:#fff8ec}.hunt-dot.on{border-style:solid;background:#fff7d6}
 .flag-garland{position:absolute;left:6%;right:6%;top:6px;display:flex;justify-content:space-around;z-index:1;pointer-events:none;border-top:2px solid var(--ink);padding-top:2px}
@@ -4629,7 +4630,7 @@ function hintNow(){
   const dirty=S.rooms.filter(r=>r.dirty);
   const noBed=S.rooms.filter(r=>!r.slots.seng&&!r.guest&&!r.dirty);
   const tips=[];
-  const leak=S.rooms.find(r=>r.leak); if(leak) tips.push(L(`Det lekker i rom ${leak.id}! Trykk på rommet og ring Oskar.`,`There’s a leak in room ${leak.id}! Tap the room and call Oskar.`));
+  const leak=S.rooms.find(r=>r.leak); if(leak) tips.push(L(`Det lekker i rom ${leak.id}! Trykk på den blå dråpen 💧 i rommet, så kommer Oskar og fikser det.`,`There’s a leak in room ${leak.id}! Tap the blue drop 💧 in the room and Oskar will come and fix it.`));
   if(S.weather&&S.weather.type!=='sky') tips.push(L(WEATHER[wType()].tipNo,WEATHER[wType()].tipEn));
   if(ready.length&&!(recepOn()&&S.recep.doOut!==false)) tips.push(L(`Rom ${ready[0].id} er klar til å sjekke ut. Trykk på rommet og ta imot betalingen!`,`Room ${ready[0].id} is ready to check out. Tap the room and take the payment!`));
   if(S.queue.length&&free.length&&!(recepOn()&&S.recep.doIn!==false)) tips.push(L(`${S.queue[0].name} venter i resepsjonen. Trykk på gjesten og velg et rom som passer ønsket.`,`${S.queue[0].name} is waiting at reception. Tap the guest and pick a room that suits their wish.`));
@@ -5738,7 +5739,7 @@ function roomCard(r){
   if(g){const met=wishMet(g,r);inner=`<div class="rc-guest">${avatar(g.look)}<span class="wishb ${met?'ok':''}">${met?'✓':WISH[g.wish].icon}</span></div>${g.status==='room'?`<div class="rc-stay"><i data-stay="${r.id}" style="width:${100-100*g.stay/g.stayMax}%"></i></div>`:''}`;}
   const lit=g&&(isNight()||isEvening());
   return `<button class="room-card ${r.lux?'lux':''} ${lit?'night-lit':''}" data-act="room" data-arg="${r.id}">
-   <div class="rc-wall" ${wallStyle(r)}><span class="rc-num">${r.id}</span>${r.leak?'<span class="rc-leak">💧</span>':''}<span class="rc-view" title="${r.view==='hav'?'Havutsikt':'Hageutsikt'}">${r.view==='hav'?'🌊':'🌳'}</span>${inner}<div class="rc-items">${items}</div>${!r.dirty?`<span class="rc-heart">♥ ${comfort(r)}</span>`:''}</div>
+   <div class="rc-wall" ${wallStyle(r)}><span class="rc-num">${r.id}</span>${r.leak?`<span class="rc-leak" data-act="fixLeak" data-arg="${r.id}" title="${L('Ring Oskar','Call Oskar')}">💧</span>`:''}<span class="rc-view" title="${r.view==='hav'?'Havutsikt':'Hageutsikt'}">${r.view==='hav'?'🌊':'🌳'}</span>${inner}<div class="rc-items">${items}</div>${!r.dirty?`<span class="rc-heart">♥ ${comfort(r)}</span>`:''}</div>
    <div class="rc-floor" ${floorStyle(r)}></div>${state}</button>`;
 }
 function starProgress(n){
@@ -5924,7 +5925,7 @@ const SHEETS={
        ${shop.map(f=>{const luxNo=f.lux&&!r.lux;const lock=S.stars<f.star||luxNo;return `<div class="pick-row ${lock?'locked':''} ${f.lux?'lux-item':''}"><span class="pi">${furnArt(f.id)}</span><div class="tx"><b>${f.lux?'✨ ':''}${f.name}</b><small>♥ ${f.comfort} komfort${S.stars<f.star?' · krever '+f.star+' stjerner':''}${luxNo?' · '+L('bare for luksusrom','luxury rooms only'):f.lux?' · '+L('luksus','luxury'):''}</small></div>${lock?'<span>🔒</span>':`<button class="btn small" data-act="buy" data-arg="${r.id}|${f.id}"><span class="coin" style="width:14px;height:14px"></span>${f.price}${f.sol?` + ${f.sol}<span class="solstar" style="width:14px;height:14px"></span>`:''}</button>`}</div>`;}).join('')}
       </div>`;
     } else if(!r.dirty) picker=`<p class="muted" style="font-weight:700">Klikk på en plass i rommet for å innrede. Mer komfort gir gladere gjester og mer betalt.</p>`;
-    return {title:`Rom ${r.id}`,icon:r.view==='hav'?'🌊':'🌳',body:`<div class="row"><span class="tag">${r.view==='hav'?'Havutsikt':'Hageutsikt'}</span>${r.lux?'<span class="tag">Luksus +4 ♥</span>':''}${r.floor===5?`<span class="tag">${L('Penthouse-utsikt','Penthouse view')} +${PENT_BONUS} ♥</span>`:''}${r.leak?`<span class="tag no">💧 ${L('Lekkasje','Leak')} −8 ♥</span><button class="btn small blue" data-act="fixLeak" data-arg="${r.id}">🔧 ${L('Ring Oskar','Call Oskar')} · 30</button>`:''}${r.suite?'<span class="tag">Suite +8 ♥</span>':''}<span class="tag">Komfort ♥ ${comfort(r)}</span></div>${rv}${info}${picker}`};
+    return {title:`Rom ${r.id}`,icon:r.view==='hav'?'🌊':'🌳',body:`<div class="row"><span class="tag">${r.view==='hav'?'Havutsikt':'Hageutsikt'}</span>${r.lux?'<span class="tag">Luksus +4 ♥</span>':''}${r.floor===5?`<span class="tag">${L('Penthouse-utsikt','Penthouse view')} +${PENT_BONUS} ♥</span>`:''}${r.leak?`<div class="leak-box"><span style="font-size:26px">💧</span><div style="flex:1"><b>${L('Det drypper fra taket!','Water is dripping from the ceiling!')}</b><small>${L('Lekkasjen gir −8 ♥ komfort til Oskar har fikset den.','The leak gives −8 ♥ comfort until Oskar fixes it.')}</small></div><button class="btn green" data-act="fixLeak" data-arg="${r.id}">🔧 ${L('Ring Oskar','Call Oskar')} · <span class="coin" style="width:14px;height:14px;vertical-align:-2px"></span> 30</button></div>`:''}${r.suite?'<span class="tag">Suite +8 ♥</span>':''}<span class="tag">Komfort ♥ ${comfort(r)}</span></div>${rv}${info}${picker}`};
   },
   guest(uid){
     const g=S.queue.find(q=>q.uid==uid); if(!g) return null; const t=gtById(g.type), w=WISH[g.wish];
