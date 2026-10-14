@@ -803,6 +803,19 @@ button.prop:hover{transform:translate(-50%,-104%) scale(1.08)}
 @keyframes tutpulse{50%{outline-color:#f7c948;outline-offset:6px}}
 @media(max-width:560px){#tutBar{bottom:calc(84px + env(safe-area-inset-bottom,0px))}.tut-tx b{font-size:13px}}
 .news-list{display:grid;gap:6px}.news-row{display:flex;gap:10px;align-items:center;border:2.5px solid var(--ink);border-radius:12px;padding:6px 10px;background:var(--paper)}.news-row span{font-size:22px}
+
+.wing-nav{gap:6px;flex-wrap:wrap}
+.flame{animation:twinkle .8s ease-in-out infinite;transform-box:fill-box;transform-origin:bottom}
+.bird{animation:poolbob 1.2s ease-in-out infinite;transform-box:fill-box}
+.dancer{animation:dance 1s ease-in-out infinite;transform-box:fill-box}
+@keyframes dance{25%{transform:translateY(-8px) rotate(-6deg)}75%{transform:translateY(-4px) rotate(6deg)}}
+.lawn-tabs{display:flex;gap:6px;flex-wrap:wrap;position:sticky;top:0;z-index:3;padding:4px 0}
+.lawn-tab{font:inherit;font-weight:900;font-size:15px;padding:8px 14px;border:3px solid var(--ink);border-radius:999px;background:var(--paper);color:var(--ink);cursor:pointer;position:relative;box-shadow:0 3px 0 var(--ink)}
+.lawn-tab.on{background:#f2a234;transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
+.lt-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--lingon,#cf4a3e);border:2px solid var(--ink);vertical-align:1px}
+.fac-new{border-style:dashed}
+.lawn-note{color:var(--white);font-weight:800;margin:0}
+@media (max-width:520px){.lawn-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.lawn-tab{font-size:12px;padding:5px 2px;border-radius:14px;display:flex;flex-direction:column;align-items:center;gap:1px;line-height:1.15}.lawn-tab .lt-ic{font-size:17px}}
 </style>
 </head>
 <body>
@@ -1081,7 +1094,7 @@ const EN={'Dagsmerker (alle dagens oppgaver fullført)':'Day badges (all of toda
 'Gullsanden og minispillet Strandskatter':'Golden Sands and the Beach Treasures mini-game','Tusletunet med dyr':'Bunny Meadow with animals','Nye møbler':'New furniture',
 'Hotellkafé, suvenirbutikk og kjæledyrrom':'Hotel café, gift shop and pet room','Ryddehjelp: betal for å få rom ryddet':'Cleaning help: pay to get rooms tidied',
 'Granlia-skogen':'The Pine Hill forest','Basseng, spillrom og diskotek':'Pool, games room and disco','Nye gjester – også den rike Fru Gulldahl':'New guests – including the wealthy Mrs. Gulldahl',
-'Spa, kino og hotellhage':'Spa, cinema and hotel garden',"Iskiosk":"Ice cream kiosk","Sykkelutleie":"Bike rental","Bibliotek":"Library","Badstue":"Sauna","Minigolf":"Mini golf","Akvarium":"Aquarium","Utescene":"Outdoor stage","Stjernekikkert":"Star telescope","Softis med strøssel. Barnefamiliene stiller seg i kø.":"Soft-serve with sprinkles. Families queue up for it.","Røde tandemsykler til turer rundt øya.":"Red tandem bikes for trips around the island.","Peis, lenestoler og hyller fulle av krim og tegneserier.":"A fireplace, armchairs and shelves full of crime novels and comics.","Vedfyrt badstue nede ved sjøen. Modige gjester bader etterpå.":"A wood-fired sauna down by the sea. Brave guests take a dip afterwards.","Ni hull med fyrtårn, vindmølle og en sjøorm.":"Nine holes with a lighthouse, a windmill and a sea serpent.","Et stort akvarium med fisk fra fjorden. Oppfyller dyre-ønsker.":"A big aquarium with fish from the fjord. Fulfils animal wishes.","Konserter i hagen på lyse sommerkvelder.":"Concerts in the garden on light summer evenings.","Et lite observatorium på taket. Se Saturns ringer!":"A little observatory on the roof. See Saturn’s rings!","Ryddehjelp i alle etasjer samtidig":"Cleaning help on every floor at once","Nissefar Nils":"Father Nisse Nils","Julegjesten":"The Christmas guest","Julestjernen":"The Christmas star","Pepperkakepynting":"Gingerbread decorating","Husk hvor glasuren skal, og pynt kakene.":"Remember where the icing goes, and decorate the biscuits.","Bare i juletida":"Only at Christmas","Resepsjonisten":"The receptionist","Kongeseng med gullhimmel":"Royal bed with golden canopy","Marmornattbord":"Marble bedside table","Krystallampe":"Crystal lamp","Persisk silketeppe":"Persian silk rug","Portrett i gullramme":"Portrait in a gold frame","Orkideer":"Orchids","Peis med knitrende ild":"Fireplace with crackling fire","Marmorbadekar med roser":"Marble bathtub with roses","Messingkikkert":"Brass telescope","Suite +8 ♥":"Suite +8 ♥","Luksusmøbler for luksusrom: marmor, persiske tepper og orkideer":"Luxury furniture for luxury rooms: marble, Persian rugs and orchids","Kongeseng, krystallampe, peis og marmorbadekar til luksusrommene":"Royal bed, crystal lamp, fireplace and marble bathtub for the luxury rooms","Forfatteren":"The author","Den lille svømmeren":"The little swimmer","Stjernekikkeren":"The stargazer","Gjesten fra 1974":"The guest from 1974","Mysteriet på Solglimt":"The Mystery of Solglimt","Mios svømmemedalje":"Mio’s swimming medal","Stjernen «Solglimt»":"The star “Solglimt”","Bildet fra åpningsdagen":"The photo from opening day","Fast gjest":"Regular guest","Hva gjør jeg nå?":"What should I do now?","Gyngestol":"Rocking chair","Grammofon":"Gramophone","Fuglebur med kanari":"Birdcage with canary","Snøkule":"Snow globe","Lavalampe":"Lava lamp","Bonsaitre":"Bonsai tree","Skipsmodell":"Model ship","Gjøkur":"Cuckoo clock","Stella Stjerneskudd":"Stella Shootingstar","Kjendisen":"The celebrity","Gullegget":"The golden egg","Sankthansmedaljen":"The midsummer medal","Iskiosk og sykkelutleie":"Ice cream kiosk and bike rental","Badstue og vannsklie i bassenget":"Sauna and a water slide in the pool","Kjellerprosjektet: bowlingbane og Ansgars hemmelighet":"The cellar project: a bowling lane and Ansgar’s secret","Minigolf og akvarium":"Mini golf and aquarium","Stjernetak i kinoen":"Starry ceiling in the cinema","Lykte-Liv":"Lantern Liv","Lyktefest-gjest":"Lantern Festival guest","Ansgars hotellmodell":"Ansgar’s hotel model","Lyktefest-medaljen":"The Lantern Festival medal","Kjellerbowling":"Cellar bowling","Kjelleren":"The cellar","Sikt midt på kjeglene og slå dem ned.":"Aim for the middle of the pins and knock them down.","Bygg bowlingbanen i kjelleren":"Build the bowling lane in the cellar","Akvariet":"The aquarium","Kjellerdør":"Cellar door",'Resepsjonist som tar imot betalingen for deg':'A receptionist who takes the payment for you','Lønn til Vigdis':'Wage for Vigdis','Tok fri':'Day off','Glimtvika – hvis du kjenner hemmeligheten':'Glimmer Cove – if you know the secret','Luksusmøbler':'Luxury furniture',
+'Spa, kino og hotellhage':'Spa, cinema and hotel garden',"Iskiosk":"Ice cream kiosk","Sykkelutleie":"Bike rental","Bibliotek":"Library","Badstue":"Sauna","Minigolf":"Mini golf","Akvarium":"Aquarium","Utescene":"Outdoor stage","Stjernekikkert":"Star telescope","Softis med strøssel. Barnefamiliene stiller seg i kø.":"Soft-serve with sprinkles. Families queue up for it.","Røde tandemsykler til turer rundt øya.":"Red tandem bikes for trips around the island.","Peis, lenestoler og hyller fulle av krim og tegneserier.":"A fireplace, armchairs and shelves full of crime novels and comics.","Vedfyrt badstue nede ved sjøen. Modige gjester bader etterpå.":"A wood-fired sauna down by the sea. Brave guests take a dip afterwards.","Ni hull med fyrtårn, vindmølle og en sjøorm.":"Nine holes with a lighthouse, a windmill and a sea serpent.","Et stort akvarium med fisk fra fjorden. Oppfyller dyre-ønsker.":"A big aquarium with fish from the fjord. Fulfils animal wishes.","Konserter i hagen på lyse sommerkvelder.":"Concerts in the garden on light summer evenings.","Et lite observatorium på taket. Se Saturns ringer!":"A little observatory on the roof. See Saturn’s rings!","Ryddehjelp i alle etasjer samtidig":"Cleaning help on every floor at once","Nissefar Nils":"Father Nisse Nils","Julegjesten":"The Christmas guest","Julestjernen":"The Christmas star","Pepperkakepynting":"Gingerbread decorating","Husk hvor glasuren skal, og pynt kakene.":"Remember where the icing goes, and decorate the biscuits.","Bare i juletida":"Only at Christmas","Resepsjonisten":"The receptionist","Kongeseng med gullhimmel":"Royal bed with golden canopy","Marmornattbord":"Marble bedside table","Krystallampe":"Crystal lamp","Persisk silketeppe":"Persian silk rug","Portrett i gullramme":"Portrait in a gold frame","Orkideer":"Orchids","Peis med knitrende ild":"Fireplace with crackling fire","Marmorbadekar med roser":"Marble bathtub with roses","Messingkikkert":"Brass telescope","Suite +8 ♥":"Suite +8 ♥","Luksusmøbler for luksusrom: marmor, persiske tepper og orkideer":"Luxury furniture for luxury rooms: marble, Persian rugs and orchids","Kongeseng, krystallampe, peis og marmorbadekar til luksusrommene":"Royal bed, crystal lamp, fireplace and marble bathtub for the luxury rooms","Forfatteren":"The author","Den lille svømmeren":"The little swimmer","Stjernekikkeren":"The stargazer","Gjesten fra 1974":"The guest from 1974","Mysteriet på Solglimt":"The Mystery of Solglimt","Mios svømmemedalje":"Mio’s swimming medal","Stjernen «Solglimt»":"The star “Solglimt”","Bildet fra åpningsdagen":"The photo from opening day","Fast gjest":"Regular guest","Hva gjør jeg nå?":"What should I do now?","Gyngestol":"Rocking chair","Grammofon":"Gramophone","Fuglebur med kanari":"Birdcage with canary","Snøkule":"Snow globe","Lavalampe":"Lava lamp","Bonsaitre":"Bonsai tree","Skipsmodell":"Model ship","Gjøkur":"Cuckoo clock","Stella Stjerneskudd":"Stella Shootingstar","Kjendisen":"The celebrity","Gullegget":"The golden egg","Sankthansmedaljen":"The midsummer medal","Villøya":"Wild Isle","En vill øy der du bygger din egen glampingplass fra bunnen av.":"A wild island where you build your own glamping site from scratch.","Frida Fjellrev":"Frida Fox","Skogvokter":"Forest ranger","Villøya-medaljen":"The Wild Isle medal","Villøya: bygg din egen glampingplass":"Wild Isle: build your own glamping site","Iskiosk og sykkelutleie":"Ice cream kiosk and bike rental","Badstue og vannsklie i bassenget":"Sauna and a water slide in the pool","Kjellerprosjektet: bowlingbane og Ansgars hemmelighet":"The cellar project: a bowling lane and Ansgar’s secret","Minigolf og akvarium":"Mini golf and aquarium","Stjernetak i kinoen":"Starry ceiling in the cinema","Lykte-Liv":"Lantern Liv","Lyktefest-gjest":"Lantern Festival guest","Ansgars hotellmodell":"Ansgar’s hotel model","Lyktefest-medaljen":"The Lantern Festival medal","Kjellerbowling":"Cellar bowling","Kjelleren":"The cellar","Sikt midt på kjeglene og slå dem ned.":"Aim for the middle of the pins and knock them down.","Bygg bowlingbanen i kjelleren":"Build the bowling lane in the cellar","Akvariet":"The aquarium","Kjellerdør":"Cellar door",'Resepsjonist som tar imot betalingen for deg':'A receptionist who takes the payment for you','Lønn til Vigdis':'Wage for Vigdis','Tok fri':'Day off','Glimtvika – hvis du kjenner hemmeligheten':'Glimmer Cove – if you know the secret','Luksusmøbler':'Luxury furniture',
 'VIP-gjester':'VIP guests','Spesialbelønning':'Special reward','Nytt i spillet':'New in the game','Hurra!':'Hooray!',
 '«Kjempe-supert! Vi er et':'“Super-duper! We are a','-stjerners hotell! Ansgar hadde danset på bordet.»':'-star hotel! Ansgar would have danced on the table.”',
 'Solglimt Hotel!':'Solglimt Hotel!',
@@ -1574,7 +1587,7 @@ const STAR_UNLOCKS={
   5:['Penthouse','VIP-gjester','Tivoli Tindra','Spesialbelønning','Måkeskjær'],
   6:['Sjøfløyen: et nytt bygg med to suiter','Loungen','Gullstjerner på skiltet'],
   7:['Spa-hotellet i Sjøfløyen','To nye suiter'],
-  8:['Vinterhagen på taket av Sjøfløyen'],
+  8:['Vinterhagen på taket av Sjøfløyen','Villøya: bygg din egen glampingplass'],
   9:['Ballsalen'],
   10:['Solglimt-suiten i tårnet','Solglimt Grand']
 };
@@ -1669,7 +1682,8 @@ const AREAS=[
   {id:'granlia',name:'Granlia',icon:'🌲',x:34,y:20,star:3,pc:'#3d6d2e',desc:'Myk, mørk skog. Den hvisker om kvelden.'},
   {id:'tivoli',name:'Tivoli Tindra',icon:'🎡',x:84,y:21,star:5,pc:'#6d4f93',desc:'Øyas fornøyelsespark. Åpner for et 5-stjerners hotell.'},
   {id:'glimtvika',name:'Glimtvika',icon:'✨',x:11,y:14,star:4,secret:true,pc:'#1c4c54',desc:'En skjult vik som bare finnes i en gammel dagbok.'},
-  {id:'makeskjaer',name:'Måkeskjær',icon:'🏝️',x:8,y:80,star:5,pc:'#9aa6b2',desc:'En liten øy med et gammelt fyr og Ansgars første hus. Ola kan ro deg over fra brygga.'}
+  {id:'makeskjaer',name:'Måkeskjær',icon:'🏝️',x:8,y:80,star:5,pc:'#9aa6b2',desc:'En liten øy med et gammelt fyr og Ansgars første hus. Ola kan ro deg over fra brygga.'},
+  {id:'villoya',name:'Villøya',icon:'🏕️',x:90,y:80,star:8,pc:'#5c9a47',desc:'En vill øy der du bygger din egen glampingplass fra bunnen av.'}
 ];
 const areaById=id=>AREAS.find(a=>a.id===id);
 function areaOpen(a){ if(a.id==='makeskjaer') return MK_OPEN(); if(a.secret) return S.stars>=a.star && S.secrets.kjeller; return S.stars>=a.star; }
@@ -1689,7 +1703,7 @@ function newState(){
     col:{skjell:[],postkort:[],gjester:[],dyr:[],fisk:[],sjeldne:[],bilder:[]},
     mk:{house:{kjokken:false,stue:false,loft:false,veranda:false},pages:[],signe:0,done:false,trips:0,rented:false},colClaimed:[],
     secrets:{},animals:{},visited:{},daily:{},talked:{},
-    pool:{fishDay:0,picked:[],found:[],specialDay:0,partyDay:0},cinema:{pick:null,shownDay:0,seen:[],popDay:0,served:[],wallDone:false},cellar:{rydd:false,bowling:false,clues:0,secret:false},facUps:{},lf:{met:false,paper:0,lanterns:0,found:[],done:0},jul:{doors:[],deco:{},eve:0},me:null,besoksbok:[],visitedHotels:[],tut:{step:0},newsSeen:'',weather:null,trophies:{},hunts:{},cloud:{on:false},marketBought:{},music:true,regs:{},keeper:{on:false},resto:{d:[],seq:0,next:0,today:0,day:0},
+    pool:{fishDay:0,picked:[],found:[],specialDay:0,partyDay:0},cinema:{pick:null,shownDay:0,seen:[],popDay:0,served:[],wallDone:false},cellar:{rydd:false,bowling:false,clues:0,secret:false},facUps:{},lf:{met:false,paper:0,lanterns:0,found:[],done:0},jul:{doors:[],deco:{},eve:0},me:null,besoksbok:[],visitedHotels:[],tut:{step:0},newsSeen:'',weather:null,trophies:{},hunts:{},cloud:{on:false},marketBought:{},music:true,regs:{},wingDaily:{},keeper:{on:false},resto:{d:[],seq:0,next:0,today:0,day:0},
     intro:false,cleaner:null,cleaners:{},recep:null,builds:{},guestbook:[],fbRecent:[],lobby:{plant:0,water:0,ring:false,ringAt:0},nextGuest:7*60+10,guestSeq:1,dayLog:{earned:0,out:0},scene:'hotell',palmTaps:0};
   for(let i=1;i<=3;i++) s.rooms.push(makeRoom(1,i));
   s.rooms[0].dirty=true; s.rooms[0].mess=genMess(6);
@@ -1917,6 +1931,7 @@ function tick(){
   if(S.fac.kino&&S.cinema.shownDay!==S.day&&isEvening()){cinemaShow();structural=true;}
   if(tickBuilds())structural=true;
   if(tickWing().length)structural=true;
+  if(villTick())structural=true;
   if(ensureDaily())structural=true;
   if(S.wingBuilds&&Object.keys(S.wingBuilds).length&&saveCount%60===0&&S.scene==='hotell')structural=true;
   if(S.min%20===0)decayAnimals();
@@ -1974,6 +1989,7 @@ function renderScene(soft){
   else if(sc.startsWith('fac:'))html=facScene(sc.slice(4));
   else if(sc==='mkhus')html=houseScene();
   else if(sc==='kjeller')html=cellarScene();
+  else if(sc.startsWith('wing:'))html=wingRoomScene(sc.slice(5));
   else if(sc.startsWith('area:'))html=areaScene(sc.slice(5));
   st.innerHTML=html;
   const el=st.querySelector('.scene');
@@ -2008,6 +2024,7 @@ function islandSVG(){
    <rect width="100" height="64" fill="#5fb9c6"/><rect width="100" height="64" fill="url(#wv)"/>
    <path d="M17 31 C13 20 24 10 38 11 C50 8 62 12 72 10 C84 9 93 16 90 28 C94 38 88 50 80 56 C70 62 56 60 46 61 C34 63 22 60 18 52 C12 46 13 38 17 31Z" fill="#f4d79c"/>
    <path d="M20 31 C17 22 26 14 38 14 C50 11 62 15 72 13 C82 12 89 18 87 28 C90 37 85 48 78 53 C68 58 56 57 46 58 C35 59 25 57 21 50 C16 45 17 38 20 31Z" fill="#8cc86a"/>
+   <ellipse cx="90.5" cy="53" rx="7" ry="4.2" fill="#f4d79c"/><ellipse cx="90.5" cy="52.6" rx="5.4" ry="3.1" fill="#8cc86a"/><path d="M87 50.4 L88.6 54 L85.4 54Z M94.5 50.6 L96 53.8 L93 53.8Z" fill="#2f6b30"/>
    <path d="M26 24 C30 15 44 14 46 22 C42 26 32 28 26 24Z" fill="#4e8a3f"/>
    ${[[28,19],[31,22],[35,17],[38,21],[42,18],[33,25],[40,24]].map(([x,y])=>`<path d="M${x} ${y-3.2} L${x+1.8} ${y+.6} L${x-1.8} ${y+.6}Z" fill="#2f6b30"/>`).join('')}
    <path d="M50 18 C54 15 62 16 63 22 C60 25 52 25 50 18Z" fill="#f3b6cf"/>
@@ -2054,8 +2071,7 @@ function hotelScene(){
   const facTiles=FAC.filter(f=>!['restaurant','basseng','kino'].includes(f.id)).map(f=>{
     if(S.builds[f.id]){const bi=buildInfo(f.id);return `<button class="fac building" data-act="fac" data-arg="${f.id}"><span class="fi">🏗️</span><b>${f.name}</b><small>Bygges …</small><span class="bar" style="width:100%;margin-top:4px"><i data-buildtile style="width:${bi.pct}%"></i></span></button>`;}
     if(S.fac[f.id])return `<button class="fac built" data-act="fac" data-arg="${f.id}"><span class="fi">${f.icon}</span><b>${f.name}</b><small>+${f.bonus} per gjest</small></button>`;
-    if(S.stars<f.star)return `<div class="fac locked"><span class="fi">🔒</span><b>${f.name}</b><small>Krever ${starStr(f.star,0)}</small></div>`;
-    return `<button class="fac plot" data-act="fac" data-arg="${f.id}"><span class="fi">🏗️</span><b>${f.name}</b><small><span class="coin" style="width:14px;height:14px;vertical-align:-2px"></span> ${f.cost}</small></button>`;
+    return '';
   }).join('');
   return `<div class="scene hotel-scene ph-${ph}">
    <div class="hotel-sky sky">
@@ -2079,8 +2095,7 @@ function hotelScene(){
      </div>
      <div class="ground-strip" style="width:calc(100% + 28px)"></div>
    </div>
-   <div class="lawn"><h3>Hotellhagen</h3>${gardenSVG()}${wingPanel()}<h3>Flere anlegg</h3><div class="fac-grid">${facTiles}</div>
-     <div class="row"><button class="btn soft small" data-act="sheet" data-arg="besok">🏘️ ${L('Besøk','Visits')}</button><button class="btn soft small" data-act="sheet" data-arg="trophies">🏆 ${L('Trofeer','Trophies')} ${trophyCount()}/${TROPHIES.length}</button>${weatherChip()}<button class="btn soft small" data-act="sheet" data-arg="guestbook">📖 Gjestebok</button><button class="btn soft small" data-act="talk" data-arg="oskar">${'🧰'} Snakk med Oskar</button><button class="btn soft small" data-act="play" data-arg="bagasje">🧳 Bagasjekaos</button><button class="btn soft small" data-act="play" data-arg="rydd">🧹 Rydd hotellrommet</button>${S.fac.diskotek?'<button class="btn soft small" data-act="play" data-arg="disko">🪩 Diskotek</button>':''}</div>
+   <div class="lawn">${lawnTabs()}${lawnBody(facTiles,`<button class="btn soft small" data-act="sheet" data-arg="besok">🏘️ ${L('Besøk','Visits')}</button><button class="btn soft small" data-act="sheet" data-arg="trophies">🏆 ${L('Trofeer','Trophies')} ${trophyCount()}/${TROPHIES.length}</button>${weatherChip()}<button class="btn soft small" data-act="sheet" data-arg="guestbook">📖 Gjestebok</button><button class="btn soft small" data-act="talk" data-arg="oskar">${'🧰'} Snakk med Oskar</button><button class="btn soft small" data-act="play" data-arg="bagasje">🧳 Bagasjekaos</button><button class="btn soft small" data-act="play" data-arg="rydd">🧹 Rydd hotellrommet</button>${S.fac.diskotek?'<button class="btn soft small" data-act="play" data-arg="disko">🪩 Diskotek</button>':''}`)}
    </div>
   </div>`;
 }
@@ -3147,7 +3162,7 @@ function tickWing(silent){
 function wingSheet(id){
   const w=wingById(id), i=wingInfo(id);
   let body=`<p style="font-weight:700">${esc(L(w.dno,w.den))}</p><div class="row">${w.bonus?`<span class="tag">+${w.bonus} ${L('mynter per utsjekket gjest','coins per checked-out guest')}</span>`:''}${w.rooms?`<span class="tag">${w.rooms.length} ${L(w.rooms.length>1?'nye suiter':'ny suite',w.rooms.length>1?'new suites':'new suite')}</span>`:''}${w.fun?`<span class="tag">${L('Oppfyller «noe morsomt»-ønsker','Fulfils “something fun” wishes')}</span>`:''}</div>`;
-  if(i.state==='done') body+=`<p class="tag ok" style="justify-self:start">${L('Ferdig bygget!','Finished!')}</p>`;
+  if(i.state==='done') body+=`<p class="tag ok" style="justify-self:start">${L('Ferdig bygget!','Finished!')}</p>${WING_ROOMS.includes(id)?`<button class="btn big blue" data-act="go" data-arg="wing:${id}">${L('Gå inn ▸','Go in ▸')}</button>`:''}`;
   else if(i.state==='building') body+=`<div class="card"><b>🏗️ ${L('Bygges nå','Under construction')}</b><div class="bar" style="margin-top:6px"><i data-wingbar="${id}" style="width:${i.pct}%"></i></div><small class="muted" style="font-weight:800">${L('Ferdig om','Ready in')} <span data-wingleft="${id}">${fmtMs(i.left)}</span>. ${L('Byggingen fortsetter selv om du lukker spillet.','Construction continues even if you close the game.')}</small></div>`;
   else if(i.state==='locked') body+=`<p class="tag">🔒 ${L('Krever','Requires')} ${w.star} ${L('stjerner','stars')}</p>`;
   else if(i.state==='needs') body+=`<p class="tag">🔒 ${L('Bygg først','Build first')}: ${esc(wingName(wingById(w.need)))}</p>`;
@@ -4626,10 +4641,10 @@ function hintNow(){
     const worst=rows.map(r=>[r,r[1]/Math.max(1,r[2])]).sort((a,b)=>a[1]-b[1])[0][0][0];
     const T={'Fornøyde gjester':L('For neste stjerne trenger du flere fornøyde gjester. Oppfyll ønskene deres og gi dem rom med høy komfort.','For the next star you need more happy guests. Fulfil their wishes and give them rooms with high comfort.'),
       'Total komfort':L('For neste stjerne trenger du mer komfort. Kjøp finere møbler, tapet og gulv til rommene.','For the next star you need more comfort. Buy nicer furniture, wallpaper and floors for the rooms.'),
-      'Anlegg':L('For neste stjerne trenger du flere anlegg. Se «Flere anlegg» nederst på hotellsiden.','For the next star you need more facilities. See “More facilities” at the bottom of the hotel page.'),
+      'Anlegg':L('For neste stjerne trenger du flere anlegg. Trykk på fanen «Anlegg» under hotellet.','For the next star you need more facilities. Tap the “Facilities” tab below the hotel.'),
       'Solmynter':L('For neste stjerne trenger du flere mynter. Sjekk ut gjester, spill minispill og server mat i restauranten.','For the next star you need more coins. Check out guests, play mini-games and serve food in the restaurant.'),
       'Solstjerner':L('For neste stjerne trenger du flere solstjerner. Du får dem av gull i minispill, oppdrag og dagens oppgaver.','For the next star you need more sun stars. You get them from gold in mini-games, quests and today’s tasks.'),
-      'Sjøfløyen':L('For neste stjerne må du bygge mer i Sjøfløyen, nederst på hotellsiden.','For the next star you need to build more in the Sea Wing, at the bottom of the hotel page.')};
+      'Sjøfløyen':L('For neste stjerne må du bygge mer i Sjøfløyen. Trykk på fanen «Sjøfløyen» under hotellet.','For the next star you need to build more in the Sea Wing. Tap the “Sea Wing” tab below the hotel.')};
     const k=Object.keys(T).find(k=>worst.startsWith(k)); if(k) tips.push(T[k]);
   }
   const reg=typeof regNext==='function'?regNext():null; if(reg) tips.push(reg);
@@ -5036,8 +5051,10 @@ function tutRender(){
 function tutSkip(){S.tut.step=TUT.length;save();tutRender();toast(L('Innføringen er hoppet over. Lyspæra 💡 øverst gir deg tips.','Tutorial skipped. The light bulb 💡 at the top gives you tips.'));}
 
 /* ---------------- NYHETER ETTER OPPDATERINGER ---------------- */
-const NEWS_VER='2026-10-13';
+const NEWS_VER='2026-10-14';
 const NEWS=[
+  ['🏕️','Villøya (8 ★): bygg din egen glampingplass fra bunnen av','Wild Isle (8 ★): build your own glamping site from scratch'],
+  ['🛋️','Gå inn i loungen, spaet, vinterhagen og ballsalen','Step inside the lounge, spa, winter garden and ballroom'],
   ['🏆','Trofehylla med 33 trofeer','A trophy shelf with 33 trophies'],
   ['🌦️','Vær og overraskelser: regn, storm, kjendiser og turistbåter','Weather and surprises: rain, storms, celebrities and tourist boats'],
   ['🖌️','Tapet og gulv i rommene','Wallpaper and floors in the rooms'],
@@ -5082,6 +5099,328 @@ async function sendFeedback(){
 }
 document.addEventListener('input',e=>{if(e.target&&e.target.id==='fbText')ui.fbDraft=e.target.value;});
 
+/* ---------------- ROM I SJØFLØYEN: lounge, spa, vinterhage og ballsal ---------------- */
+const WING_ROOMS=['lounge','spa','vinterhage','ballsal'];
+const WR=()=>{S.wingDaily=S.wingDaily||{};return S.wingDaily;};
+const wrDone=k=>WR()[k]===S.day;
+function wrGuests(n){
+  const gs=S.rooms.filter(r=>r.guest&&r.guest.status==='room').map(r=>r.guest);
+  return gs.slice(0,n);
+}
+function wrFig(g,x,y,w,cls=''){return `<g class="${cls}">${svgAv(Object.assign({},g.look,{bg:'none'}),x,y,w)}</g>`;}
+function wingRoomScene(id){
+  if(!S.wing||!S.wing[id]){S.scene='hotell';return hotelScene();}
+  const eve=isEvening(), night=isNight(); let svg='', title='', acts='', hint='';
+  const I=GI;
+  if(id==='lounge'){
+    title=L('Loungen','The lounge');
+    const gs=wrGuests(4);
+    svg=`<rect width="800" height="320" fill="#6d4f93" stroke="none"/>${Array.from({length:10},(_,i)=>`<path d="M${i*80+40} 0 V320" stroke="#5f4482" stroke-width="30"/>`).join('')}
+     <rect y="320" width="800" height="200" fill="#8a5a33" stroke="none"/><ellipse cx="400" cy="440" rx="300" ry="60" fill="#b8303a"/><ellipse cx="400" cy="440" rx="260" ry="46" fill="none" stroke="#f7c948" stroke-width="3"/>
+     <g class="hot" data-act="wlook" data-arg="vindu"><rect x="300" y="40" width="200" height="190" rx="8" fill="#fff8ec"/><rect x="310" y="50" width="180" height="170" fill="${night?'#1c2147':eve?'#f2a96b':'#9fd8e8'}"/>${night?'<circle cx="440" cy="90" r="14" fill="#fff3c4" stroke="none"/>':''}<path d="M310 170 q90 -20 180 0 V220 H310Z" fill="#2b6f78" stroke="none"/><path d="M400 50 V220 M310 135 H490" stroke-width="3"/></g>
+     <g class="hot" data-act="wlook" data-arg="peis"><rect x="560" y="170" width="190" height="150" fill="#cfc6b8"/><rect x="550" y="160" width="210" height="16" rx="4" fill="#7a4e2c"/><path d="M600 320 V250 Q655 200 710 250 V320Z" fill="${I}"/><path d="M620 318 Q616 290 636 276 Q634 294 646 296 Q648 268 668 258 Q664 284 680 288 Q694 302 688 318Z" fill="#f2a234" class="flame"/><path d="M632 318 Q634 300 646 292 Q648 304 658 304 Q662 290 670 286 Q674 304 672 318Z" fill="#f7c948" class="flame"/></g>
+     <g class="hot" data-act="loungePiano"><path d="M40 330 L60 230 Q120 190 210 230 L230 330Z" fill="${I}"/><rect x="40" y="320" width="200" height="22" fill="#2b2540"/><rect x="50" y="300" width="180" height="20" fill="#fff8ec"/>${Array.from({length:12},(_,i)=>`<rect x="${56+i*15}" y="300" width="7" height="12" fill="${I}" stroke="none"/>`).join('')}<path d="M60 342 v60 M220 342 v60" stroke-width="6"/></g>
+     <g class="hot" data-act="wlook" data-arg="sofa"><rect x="250" y="370" width="300" height="70" rx="20" fill="#cf4a3e"/><rect x="250" y="340" width="300" height="46" rx="18" fill="#b8303a"/><rect x="236" y="360" width="34" height="80" rx="14" fill="#cf4a3e"/><rect x="530" y="360" width="34" height="80" rx="14" fill="#cf4a3e"/></g>
+     ${gs.map((g,i)=>wrFig(g,270+i*68,280,74)).join('')}
+     <g class="hot" data-act="wlook" data-arg="kakao"><rect x="600" y="400" width="120" height="16" rx="5" fill="#9a6436"/><path d="M612 416 v50 M708 416 v50" stroke-width="5"/>${[620,650,680].map(x=>`<rect x="${x}" y="384" width="18" height="18" rx="3" fill="#fff8ec"/><path d="M${x+18} 388 q8 3 0 9" fill="none" stroke-width="2"/>${wrDone('kakao')?`<path d="M${x+5} 382 q-3 -6 0 -12 M${x+12} 382 q-3 -6 0 -12" fill="none" stroke="#9aa6b2" stroke-width="2" class="smoke"/>`:''}`).join('')}</g>`;
+    acts=`<button class="btn small ${wrDone('kakao')?'soft':'green'}" data-act="wingAct" data-arg="kakao" ${wrDone('kakao')||!isEvening()?'disabled':''}>☕ ${wrDone('kakao')?L('Kakao er servert','Cocoa served'):isEvening()?L('Server varm kakao','Serve hot cocoa'):L('Kakao serveres om kvelden','Cocoa is served in the evening')}</button><button class="btn small blue" data-act="loungePiano">🎹 ${L('Spill på flygelet','Play the piano')}</button>`;
+    hint=L('Om kvelden kan du servere varm kakao. Gjestene i loungen blir ekstra fornøyde.','In the evening you can serve hot cocoa. The guests in the lounge become extra happy.');
+  }
+  else if(id==='spa'){
+    title=L('Spa-hotellet','The spa hotel');
+    const gs=wrGuests(3);
+    svg=`<rect width="800" height="300" fill="#dff1f4" stroke="none"/>${Array.from({length:20},(_,i)=>`<path d="M${i*40} 0 V300" stroke="#cbe7ec" stroke-width="2"/>`).join('')}${Array.from({length:8},(_,i)=>`<path d="M0 ${i*40} H800" stroke="#cbe7ec" stroke-width="2"/>`).join('')}
+     <rect y="300" width="800" height="220" fill="#e8e1d4" stroke="none"/>${Array.from({length:10},(_,i)=>`<path d="M${i*80} 300 V520" stroke="#d6ccb5" stroke-width="2"/>`).join('')}
+     <g class="hot" data-act="wlook" data-arg="utsikt"><rect x="40" y="40" width="300" height="180" rx="90" fill="#fff8ec"/><rect x="52" y="52" width="276" height="156" rx="78" fill="${night?'#1c2147':'#9fd8e8'}"/><path d="M52 160 q138 -24 276 0 V190 Q190 220 52 190Z" fill="#2b6f78" stroke="none"/></g>
+     <g class="hot" data-act="wlook" data-arg="basseng"><ellipse cx="300" cy="400" rx="230" ry="70" fill="#f3eee4"/><ellipse cx="300" cy="396" rx="200" ry="54" fill="#7fd0dc"/>${[0,1,2].map(i=>`<path d="M${200+i*90} 380 q-8 -14 0 -28 q8 -14 0 -28" fill="none" stroke="#fff" stroke-width="3" stroke-opacity=".7" class="smoke" style="animation-delay:${i*.6}s"/>`).join('')}
+      ${gs.slice(0,2).map((g,i)=>wrFig(g,190+i*150,340,80)).join('')}<ellipse cx="300" cy="420" rx="190" ry="30" fill="#7fd0dc" stroke="none" opacity=".85"/></g>
+     <g class="hot" data-act="wlook" data-arg="benk"><rect x="560" y="330" width="200" height="30" rx="10" fill="#fff8ec"/><rect x="560" y="356" width="200" height="12" fill="#c8894f"/><path d="M575 368 v60 M745 368 v60" stroke-width="5"/>${gs[2]?wrFig(gs[2],580,270,74):''}<circle cx="700" cy="340" r="9" fill="#7cbf5a"/><circle cx="700" cy="340" r="5" fill="#dff1e0"/><circle cx="722" cy="340" r="9" fill="#7cbf5a"/><circle cx="722" cy="340" r="5" fill="#dff1e0"/></g>
+     <g class="hot" data-act="wlook" data-arg="stein">${[[600,240],[640,250],[680,238],[720,252]].map(([x,y])=>`<ellipse cx="${x}" cy="${y}" rx="18" ry="11" fill="#6b6478"/>`).join('')}<path d="M590 230 q8 -14 0 -28 M650 236 q8 -14 0 -28 M710 230 q8 -14 0 -28" fill="none" stroke="#9aa6b2" stroke-width="2" class="smoke"/></g>
+     <g class="hot" data-act="wlook" data-arg="handkle">${['#fff','#ee86b6','#5fb9c6'].map((c,i)=>`<rect x="400" y="${60+i*26}" width="120" height="20" rx="8" fill="${c}"/>`).join('')}</g>`;
+    acts=`<button class="btn small ${wrDone('spa')?'soft':'green'}" data-act="wingAct" data-arg="spa" ${wrDone('spa')?'disabled':''}>🧖 ${wrDone('spa')?L('Spa-dagen er gitt','Spa day given'):L('Gi gjestene en spa-dag','Give the guests a spa day')}</button>`;
+    hint=L('En gang om dagen kan du gi alle gjestene en spa-dag. De gir tips og blir ekstra fornøyde.','Once a day you can give all the guests a spa day. They tip and become extra happy.');
+  }
+  else if(id==='vinterhage'){
+    title=L('Vinterhagen','The winter garden');
+    const gs=wrGuests(2); const picked=wrDone('appelsin');
+    svg=`<rect width="800" height="520" fill="${night?'#2b3a6a':'#d6f0f4'}" stroke="none"/>
+     ${Array.from({length:9},(_,i)=>`<path d="M${i*100} 0 Q400 -60 ${800-i*100} 0" stroke="#fff8ec" stroke-width="3" fill="none" opacity=".6"/>`).join('')}${Array.from({length:9},(_,i)=>`<path d="M${i*100} 0 V360" stroke="#fff8ec" stroke-width="4" opacity=".7"/>`).join('')}
+     <rect y="360" width="800" height="160" fill="#c98d57" stroke="none"/>${Array.from({length:12},(_,i)=>`<path d="M${i*70} 360 L${i*70+35} 520" stroke="#b97c48" stroke-width="2"/>`).join('')}
+     <g class="hot" data-act="wlook" data-arg="palme"><path d="M130 420 Q120 300 150 200" stroke="#8a5a33" stroke-width="16" fill="none"/>${[[-70,-10],[-40,-50],[30,-55],[70,-15],[0,-70]].map(([dx,dy])=>`<path d="M150 200 Q${150+dx/2} ${200+dy} ${150+dx} ${200+dy+30}" stroke="#4e9a3f" stroke-width="14" fill="none"/>`).join('')}<rect x="100" y="410" width="70" height="50" rx="6" fill="#c8643b"/></g>
+     <g class="hot" data-act="vinterOrange"><path d="M560 420 V300" stroke="#8a5a33" stroke-width="12"/><circle cx="560" cy="260" r="80" fill="#4e9a3f"/><circle cx="520" cy="230" r="44" fill="#5c9a47"/><circle cx="610" cy="240" r="46" fill="#5c9a47"/>${picked?'':[[520,240],[560,210],[600,260],[540,290],[590,220],[620,290]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="10" fill="#f2a234"/>`).join('')}<rect x="520" y="410" width="80" height="50" rx="6" fill="#2b6f78"/></g>
+     <g class="hot" data-act="vinterBird"><path d="M300 120 h150" stroke="#8a5a33" stroke-width="4"/>${[[330,'#cf4a3e'],[380,'#f7c948'],[420,'#5fb9c6']].map(([x,c],i)=>`<g class="bird" style="animation-delay:${i*.4}s"><ellipse cx="${x}" cy="108" rx="13" ry="10" fill="${c}"/><circle cx="${x+9}" cy="100" r="7" fill="${c}"/><path d="M${x+16} 100 l6 2 -6 2z" fill="#f2a234" stroke-width="1.5"/><circle cx="${x+10}" cy="99" r="1.5" fill="${I}" stroke="none"/></g>`).join('')}</g>
+     <g class="hot" data-act="wlook" data-arg="benk2"><rect x="250" y="400" width="200" height="22" rx="8" fill="#fff8ec"/><path d="M262 422 v40 M438 422 v40" stroke-width="5"/>${gs.map((g,i)=>wrFig(g,270+i*90,330,78)).join('')}</g>
+     ${[[720,440,'#ee86b6'],[680,460,'#f7c948'],[760,465,'#cf4a3e']].map(([x,y,c])=>`<circle cx="${x}" cy="${y}" r="12" fill="${c}"/><circle cx="${x}" cy="${y}" r="4" fill="#f7c948"/>`).join('')}`;
+    acts=`<button class="btn small ${picked?'soft':'green'}" data-act="vinterOrange" ${picked?'disabled':''}>🍊 ${picked?L('Appelsinene er plukket','Oranges picked'):L('Plukk appelsiner','Pick oranges')}</button><button class="btn small blue" data-act="vinterBird">🐦 ${L('Hør på fuglene','Listen to the birds')}</button>`;
+    hint=L('Appelsintreet gir frukt hver dag, og den blir til porsjoner i restauranten.','The orange tree gives fruit every day, and it becomes portions in the restaurant.');
+  }
+  else if(id==='ballsal'){
+    title=L('Ballsalen','The ballroom');
+    const ball=WR().ball===S.day&&isEvening(); const gs=wrGuests(6);
+    svg=`<rect width="800" height="300" fill="#f6dca0" stroke="none"/>${Array.from({length:8},(_,i)=>`<rect x="${20+i*100}" y="40" width="60" height="220" rx="30" fill="${night?'#2b3a6a':'#fff3c4'}"/>`).join('')}
+     <rect y="0" width="800" height="24" fill="#e3b53c" stroke="none"/>
+     ${[200,400,600].map(x=>`<g class="hot" data-act="wlook" data-arg="krone"><path d="M${x} 24 V60" stroke-width="2"/><path d="M${x-50} 76 Q${x} 104 ${x+50} 76" fill="none" stroke="#e3b53c" stroke-width="5"/><path d="M${x-36} 66 Q${x} 86 ${x+36} 66" fill="none" stroke="#e3b53c" stroke-width="4"/>${[-50,-25,0,25,50].map(d=>`<path d="M${x+d} ${d===0?92:84} l-4 8 4 8 4 -8z" fill="#dff1f7" stroke-width="1.5"/>`).join('')}${ball?`<circle cx="${x}" cy="80" r="70" fill="#fff3b0" opacity=".25" stroke="none"/>`:''}</g>`).join('')}
+     <rect y="300" width="800" height="220" fill="#7a4e2c" stroke="none"/>${Array.from({length:8},(_,r)=>Array.from({length:8},(_,c)=>`<rect x="${c*100}" y="${300+r*28}" width="100" height="28" fill="${(r+c)%2?'#9a6436':'#c8894f'}" stroke="none"/>`).join('')).join('')}
+     <g class="hot" data-act="wlook" data-arg="orkester"><rect x="600" y="250" width="190" height="60" rx="8" fill="#b8303a"/>${ball?svgAv(NPCS.dina.look,650,180,80):''}<path d="M620 250 l-6 -40 M760 250 l6 -40" stroke-width="3"/></g>
+     ${gs.map((g,i)=>wrFig(g,80+i*90,ball?330+(i%2)*20:360,84,ball?'dancer':'')).join('')}
+     ${ball?Array.from({length:14},(_,i)=>`<circle cx="${(i*61)%800}" cy="${120+(i*37)%160}" r="5" fill="${['#cf4a3e','#f7c948','#5fb9c6','#ee86b6'][i%4]}" stroke="none" class="twinkle" style="animation-delay:${i*.15}s"/>`).join(''):''}`;
+    acts=ball?`<span class="tag ok">💃 ${L('Ballet er i gang!','The ball is on!')}</span><button class="btn small blue" data-act="play" data-arg="disko">🎵 ${L('Dans med (minispill)','Join the dance (mini-game)')}</button>`:`<button class="btn small green" data-act="wingAct" data-arg="ball" ${!isEvening()||WR().ball===S.day||S.coins<200?'disabled':''}>💃 ${WR().ball===S.day?L('Ballet er over for i dag','The ball is over for today'):isEvening()?L('Arranger ball','Throw a ball')+' · 200':L('Ball holdes om kvelden','Balls are held in the evening')}</button>`;
+    hint=L('Om kvelden kan du arrangere ball. Alle gjestene får en uforglemmelig kveld (+1 stjerne).','In the evening you can throw a ball. All guests get an unforgettable evening (+1 star).');
+  }
+  return `<div class="scene lobby-scene ph-${phase()}"><div class="lobby-wrap"><svg class="lobby-svg" viewBox="0 0 800 520" role="img" aria-label="${esc(title)}"><g stroke="${I}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">${svg}</g>${night?'<rect width="800" height="520" fill="rgba(36,40,96,.25)" pointer-events="none"/>':''}</svg><div class="look-cap" id="lookCap" hidden></div></div>
+   <div class="lobby-ui"><div class="lobby-bar"><b class="lb-title">${title}</b><span class="muted lb-hint">${L('Trykk på ting for å undersøke dem.','Tap things to investigate them.')}</span><button class="btn small soft" data-act="go" data-arg="hotell">${L('← Hotellet','← Hotel')}</button></div>
+   <div class="row wing-nav">${WING_ROOMS.filter(k=>S.wing[k]).map(k=>`<button class="btn small ${k===id?'blue':'soft'}" data-act="go" data-arg="wing:${k}">${esc(wingName(wingById(k)))}</button>`).join('')}</div>
+   <p class="muted" style="font-weight:700;margin:0">${hint}</p><div class="fac-acts"><div class="row">${acts}</div></div></div></div>`;
+}
+function wingLook(id){
+  return ({
+    vindu:L('Utsikt rett ut over sjøen. Om kvelden går sola ned bak Måkeskjær.','A view straight out over the sea. In the evening the sun sets behind Gull Skerry.'),
+    peis:L('Peisen knitrer. Oskar hogger ved hver tirsdag og synger mens han gjør det.','The fire crackles. Oskar chops wood every Tuesday and sings while he does it.'),
+    sofa:L('Den røde sofaen er så myk at gjestene sovner midt i samtalen.','The red sofa is so soft that guests fall asleep mid-conversation.'),
+    kakao:L('Varm kakao med krem. Bertil sier hemmeligheten er en klype kanel.','Hot cocoa with cream. Bertil says the secret is a pinch of cinnamon.'),
+    utsikt:L('Fra det varme bassenget ser du båtene seile forbi.','From the warm pool you can see the boats sail past.'),
+    basseng:L('Vannet er 38 grader. Ingen vil noensinne gå opp.','The water is 38 degrees. Nobody ever wants to get out.'),
+    benk:L('Massasjebenken. Agurkskivene er Bertils, og han teller dem.','The massage bench. The cucumber slices are Bertil’s, and he counts them.'),
+    stein:L('Varme steiner som damper. De lukter av eukalyptus.','Warm steaming stones. They smell of eucalyptus.'),
+    handkle:L('Myke håndklær i alle farger. Det rosa er alltid først borte.','Soft towels in every colour. The pink one is always gone first.'),
+    palme:L('En ekte palme midt i Norge. Den har fått navnet Pål.','A real palm tree in the middle of Norway. It has been named Pål.'),
+    benk2:L('En benk under glasstaket. Her sitter gjestene og leser når det regner.','A bench under the glass roof. The guests sit here and read when it rains.'),
+    krone:L('Lysekronene har 400 krystaller hver. Oskar har talt dem. To ganger.','The chandeliers have 400 crystals each. Oskar has counted them. Twice.'),
+    orkester:L('Orkesterplassen. Dina spiller her når det er ball.','The orchestra stage. Dina plays here when there’s a ball.')
+  })[id]||'';
+}
+function wingAct(k){
+  const gs=S.rooms.filter(r=>r.guest&&r.guest.status==='room').map(r=>r.guest);
+  if(k==='kakao'){ if(wrDone('kakao')||!isEvening()) return; WR().kakao=S.day; const n=giveKos(null); addCoins(10+n*6); sfx('good'); toast(L(`Varm kakao til alle! ${n} gjest${n===1?'':'er'} koser seg (+1 stjerne).`,`Hot cocoa for everyone! ${n} guest${n===1?'':'s'} are cosy (+1 star).`),'good'); }
+  else if(k==='spa'){ if(wrDone('spa')) return; WR().spa=S.day; const n=giveKos(null); const tip=gs.length*12; addCoins(tip); sfx('good'); toast(L(`Spa-dag! Gjestene ga ${tip} mynter i tips.`,`Spa day! The guests tipped ${tip} coins.`),'good'); }
+  else if(k==='ball'){ if(!isEvening()||WR().ball===S.day) return; if(!spend(200)) return; WR().ball=S.day; giveKos(null); confetti(); sfx('star'); toast(L('Ballet har begynt! Alle gjestene danser.','The ball has begun! All the guests are dancing.'),'gold'); S.stats.balls=(S.stats.balls||0)+1; }
+  renderScene(true); checkQuests(); save();
+}
+function vinterOrange(){ if(wrDone('appelsin')) return; WR().appelsin=S.day; S.portions+=3; sfx('pop'); floatText(L('+3 porsjoner','+3 portions')); toast(L('Du plukket en kurv appelsiner. Bertil lager juice!','You picked a basket of oranges. Bertil makes juice!'),'good'); renderScene(true); save(); }
+function vinterBird(){ [784,880,988,1175,988].forEach((f,i)=>setTimeout(()=>tone(f,.12,'sine',.07),i*140)); showLook(L('Kvitre-kvitre! Fuglene i vinterhagen synger en liten sang for deg.','Tweet-tweet! The birds in the winter garden sing a little song for you.')); }
+function loungePiano(){ const n=[523,587,659,698,784,659,523]; n.forEach((f,i)=>setTimeout(()=>tone(f,.28,'triangle',.08),i*220)); showLook(L('Du spiller en liten melodi på flygelet. Gjestene klapper høflig.','You play a little tune on the grand piano. The guests clap politely.')); }
+
+/* =====================================================================
+   VILLØYA: GLAMPING – bygg en leirplass fra bunnen av (fra 8 stjerner)
+   ===================================================================== */
+const VILL_STAR=8;
+const VUNITS={
+  telt:{no:'Telt',d:'teltet',en:'Tent',cost:300,c:8,lvl:1},
+  tipi:{no:'Tipi',d:'tipien',en:'Tipi',cost:700,c:14,lvl:2},
+  trehytte:{no:'Trehytte',d:'trehytta',en:'Treehouse',cost:1500,c:24,lvl:3},
+  boble:{no:'Boblehytte',d:'boblehytta',en:'Bubble dome',cost:2600,c:34,lvl:4},
+  flytende:{no:'Flytende hytte',d:'den flytende hytta',en:'Floating cabin',cost:4000,c:45,lvl:5}
+};
+const VPLOTS=[ // x,y, nivå, havutsikt, vann
+  {x:240,y:290,lvl:1,hav:false},{x:365,y:255,lvl:1,hav:false},{x:510,y:255,lvl:1,hav:true},{x:640,y:320,lvl:1,hav:true},
+  {x:300,y:410,lvl:2,hav:false},{x:540,y:410,lvl:2,hav:true},{x:660,y:430,lvl:3,hav:true},{x:760,y:495,lvl:4,hav:true,water:true}
+];
+const VFAC={
+  baal:{no:'Leirbål',en:'Campfire',cost:200,lvl:1,x:430,y:360,dno:'Tennes hver kveld hvis du har 2 ved. Gjester ved bålet får en ekstra stjerne.',den:'Lit every evening if you have 2 firewood. Guests by the fire get an extra star.'},
+  service:{no:'Servicehus',en:'Service hut',cost:400,lvl:1,x:90,y:300,dno:'Dusj og toalett. +4 komfort i alle hytter og telt.',den:'Shower and toilet. +4 comfort in all tents and cabins.'},
+  kajakk:{no:'Kajakkutleie',en:'Kayak rental',cost:900,lvl:2,x:330,y:488,dno:'Eventyrlystne gjester elsker å padle rundt øya.',den:'Adventurous guests love paddling round the island.'},
+  stamp:{no:'Badestamp',en:'Hot tub',cost:1600,lvl:3,x:718,y:215,dno:'Et vedfyrt badekar under stjernene. Gir ro og glede.',den:'A wood-fired tub under the stars. Brings calm and joy.'},
+  klatre:{no:'Klatrepark',en:'Treetop adventure',cost:2500,lvl:4,x:105,y:180,dno:'Tau, bruer og en lang zipline mellom trærne.',den:'Ropes, bridges and a long zipline between the trees.'},
+  stjerne:{no:'Stjerneplass',en:'Stargazing deck',cost:3500,lvl:5,x:440,y:145,dno:'En utsiktsplattform med kikkert på toppen av øya.',den:'A lookout deck with a telescope on top of the island.'}
+};
+const VWISH={
+  baal:{e:'🔥',no:'Jeg vil sitte ved et leirbål i kveld.',en:'I want to sit by a campfire tonight.',ok:u=>!!(S.vill.fac.baal&&S.vill.litDay===S.day)},
+  eventyr:{e:'🛶',no:'Jeg vil ha et skikkelig eventyr!',en:'I want a real adventure!',ok:u=>!!(S.vill.fac.kajakk||S.vill.fac.klatre)},
+  ro:{e:'🌿',no:'Jeg vil bare slappe helt av.',en:'I just want to relax completely.',ok:u=>!!S.vill.fac.stamp||vComfort(u)>=24},
+  utsikt:{e:'🌊',no:'Jeg vil våkne med utsikt over havet.',en:'I want to wake up to a sea view.',ok:u=>!!VPLOTS[u.p].hav},
+  stjerner:{e:'✨',no:'Jeg vil se stjernene i natt.',en:'I want to see the stars tonight.',ok:u=>!!S.vill.fac.stjerne||u.type==='boble'}
+};
+const VTYPES=[
+  {id:'speider',no:'Speidergjengen',en:'The scout troop',look:{style:'short',acc:'cap',capc:'#5c9a47',shirt:'#5c9a47'},wishes:['baal','eventyr'],need:8},
+  {id:'tur',no:'Turgåer-Trine',en:'Hiker Trine',look:{style:'long',acc:'band',shirt:'#cf4a3e'},wishes:['utsikt','eventyr'],need:10},
+  {id:'yoga',no:'Yoga-Yrsa',en:'Yoga Yrsa',look:{style:'bun',shirt:'#ee86b6'},wishes:['ro','utsikt'],need:16},
+  {id:'stjern',no:'Stjerne-Stian',en:'Stargazer Stian',look:{style:'curly',acc:'glasses',shirt:'#3a3352'},wishes:['stjerner','ro'],need:20},
+  {id:'familie',no:'Familien Bålstad',en:'The Bonfire family',look:{style:'short',acc:'bow',shirt:'#f2a234'},wishes:['baal','eventyr','utsikt'],need:12}
+];
+const VLEVEL=[null,
+  {happy:0,units:0,fac:0,cost:0},
+  {happy:5,units:2,fac:1,cost:1000},
+  {happy:14,units:4,fac:3,cost:2500},
+  {happy:28,units:6,fac:4,cost:5000},
+  {happy:45,units:7,fac:5,cost:9000}];
+const VMAX=5;
+const VL=()=>{if(!S.vill)S.vill={};const v=S.vill;v.lvl=v.lvl||1;v.units=v.units||{};v.fac=v.fac||{};v.queue=v.queue||[];v.wood=v.wood||0;v.woodDay=v.woodDay||{};v.happy=v.happy||0;v.guests=v.guests||0;v.seq=v.seq||1;return v;};
+const villOpen=()=>S.stars>=VILL_STAR;
+const vUnits=()=>Object.values(VL().units).filter(u=>u&&u.type);
+function vComfort(u){let c=VUNITS[u.type].c; if(VL().fac.service)c+=4; if(VPLOTS[u.p].hav)c+=3; return c;}
+function vRate(g,u){let s=2;const c=vComfort(u);if(c>=g.need*.6)s++;if(c>=g.need)s++;if(VWISH[g.wish].ok(u))s+=2;if(VL().fac.baal&&VL().litDay===S.day&&isEvening())s++;return clamp(s,1,5);}
+function vReqRows(n){const q=VLEVEL[n];if(!q)return null;const v=VL();return [[L('Fornøyde campinggjester','Happy campers'),v.happy,q.happy],[L('Telt og hytter','Tents and cabins'),vUnits().length,q.units],[L('Aktiviteter','Activities'),Object.keys(v.fac).length,q.fac],[L('Mynter (betales)','Coins (paid)'),S.coins,q.cost]];}
+function villUpgrade(){
+  const n=VL().lvl+1, rows=vReqRows(n); if(!rows||!rows.every(r=>r[1]>=r[2])) return;
+  if(!spend(VLEVEL[n].cost)) return; VL().lvl=n; sfx('star'); confetti(); if(n>=VMAX){giveRare('villmedalje');addSol(3);}
+  say('frida',[L(`Villøya har nå ${n} 🏕️! Flere ting kan bygges.`,`Wild Isle now has ${n} 🏕️! More things can be built.`)].concat(n>=VMAX?[L('Dette er den fineste leirplassen langs hele kysten. Takk!','This is the finest campsite along the whole coast. Thank you!')]:[]));
+  closeSheet(); renderScene(true); save();
+}
+NPCS.frida={name:'Frida Fjellrev',role:'Skogvokter',look:{skin:'#e8b48c',hair:'#c0522a',style:'long',shirt:'#5c9a47',acc:'cap',capc:'#7a4e2c',bg:'#e2f0d6'}};
+RARES.push({id:'villmedalje',name:'Villøya-medaljen',e:'🏕️'});
+
+/* ---- gjester ---- */
+function vSpawn(){
+  const v=VL(), h=S.min/60; if(h<8||h>=19||v.queue.length>=3) return false;
+  const free=vUnits().length; if(!free) return false;
+  const t=pick(VTYPES); const look=Object.assign({skin:pick(SKINS),hair:pick(HAIRS),bg:'#eaf6dd'},t.look);
+  v.queue.push({uid:v.seq++,type:t.id,name:L(t.no,t.en),look,wish:pick(t.wishes),need:t.need+v.lvl*4,arrive:absMin()});
+  if(S.scene==='area:villoya') toast(L('En ny campinggjest har kommet til velkomstbua!','A new camper has arrived at the welcome hut!'));
+  return true;
+}
+function vAssign(a){
+  const [uid,p]=a.split('|'); const v=VL(); const gi=v.queue.findIndex(g=>g.uid==uid); const u=v.units[p]; if(gi<0||!u||u.guest||u.dirty) return;
+  const g=v.queue.splice(gi,1)[0]; g.stay=rnd(100,160); g.status='inne'; u.guest=g; sfx('bell');
+  toast(L(`${g.name} har flyttet inn i ${VUNITS[u.type].d}.`,`${g.name} has moved into the ${VUNITS[u.type].en.toLowerCase()}.`));
+  closeSheet(); renderScene(true); save();
+}
+function vCheckout(p){
+  const v=VL(), u=v.units[p], g=u&&u.guest; if(!g||g.status!=='klar') return;
+  const st=vRate(g,u), met=VWISH[g.wish].ok(u);
+  const pay=Math.round((30+vComfort(u)*1.4+Object.keys(v.fac).length*4)*(.6+st*.12))+(met?15:0);
+  addCoins(pay); v.guests++; if(st>=3) v.happy++; S.stats.campers=(S.stats.campers||0)+1;
+  u.guest=null; u.dirty=true; sfx('coin');
+  toast(L(`${g.name}: ${'★'.repeat(st)}${'☆'.repeat(5-st)} «${met?'Akkurat det jeg drømte om!':'Fin tur, men jeg savnet noe.'}» +${pay}`,`${g.name}: ${'★'.repeat(st)}${'☆'.repeat(5-st)} “${met?'Just what I dreamed of!':'Nice trip, but I missed something.'}” +${pay}`),st>=3?'good':'');
+  renderScene(true); save();
+}
+function vTidy(p){const u=VL().units[p]; if(!u||!u.dirty) return; u.dirty=false; sfx('pop'); floatText(L('Ryddet!','Tidy!')); renderScene(true); save();}
+function vBuildUnit(a){
+  const [p,type]=a.split('|'); const v=VL(), t=VUNITS[type], pl=VPLOTS[+p]; if(!t||!pl||v.lvl<t.lvl||v.lvl<pl.lvl) return;
+  if((type==='flytende')!==!!pl.water){toast(L('Den flytende hytta må stå på vannet, og de andre på land.','The floating cabin must be on the water, and the others on land.'));return;}
+  const old=v.units[p]; if(old&&old.guest){toast(L('Det bor noen der nå!','Someone is staying there now!'));return;}
+  if(!spend(t.cost)) return; v.units[p]={p:+p,type,guest:null,dirty:false}; sfx('star');
+  toast(L(`${t.no} er bygget!`,`${t.en} built!`),'good'); closeSheet(); renderScene(true); save();
+}
+function vBuildFac(id){const v=VL(), f=VFAC[id]; if(!f||v.fac[id]||v.lvl<f.lvl) return; if(!spend(f.cost)) return; v.fac[id]=true; sfx('star'); toast(L(`${f.no} er bygget!`,`${f.en} built!`),'good'); closeSheet(); renderScene(true); save();}
+const VWOOD=[[495,478],[205,470],[752,312],[290,140]];
+function vWood(i){const v=VL(); const k=i+'|'+S.day; if(v.woodDay[k]) return; v.woodDay[k]=1; v.wood++; sfx('pop'); floatText('+1 '+L('ved','firewood'));
+  const keys=Object.keys(v.woodDay); if(keys.length>40) keys.slice(0,keys.length-40).forEach(k=>delete v.woodDay[k]); renderScene(true); save();}
+function villTick(){
+  if(!villOpen()||!S.vill||!S.vill.intro) return false; const v=VL(); let ch=false; const abs=absMin();
+  if(abs>=(v.next||0)){ if(vSpawn()) ch=true; v.next=abs+rnd(40,80)-v.lvl*5; }
+  for(const u of vUnits()){const g=u.guest; if(g&&g.status==='inne'){g.stay-=2; if(g.stay<=0){g.status='klar';ch=true;}}}
+  v.queue=v.queue.filter(g=>abs-g.arrive<300);
+  if(v.fac.baal&&v.litDay!==S.day&&S.min>=18*60&&S.min<18*60+4){ if(v.wood>=2){v.wood-=2;v.litDay=S.day;ch=true;if(S.scene==='area:villoya')toast(L('🔥 Leirbålet er tent! Gjestene samles rundt det.','🔥 The campfire is lit! The guests gather around it.'),'good');} else if(S.scene==='area:villoya') toast(L('Ikke nok ved til leirbålet i kveld. Samle ved på dagen!','Not enough firewood for the campfire tonight. Collect wood during the day!')); }
+  return ch&&S.scene==='area:villoya';
+}
+
+/* ---- tegninger ---- */
+function vUnitSVG(type,x,y){
+  const I=GI;
+  if(type==='telt') return `<g stroke="${I}" stroke-width="3" stroke-linejoin="round"><path d="M${x-42} ${y} L${x} ${y-56} L${x+42} ${y}Z" fill="#f2a234"/><path d="M${x} ${y-56} L${x-12} ${y} H${x+12}Z" fill="#c8643b"/><path d="M${x-46} ${y} H${x+46}" stroke-width="3"/></g>`;
+  if(type==='tipi') return `<g stroke="${I}" stroke-width="3" stroke-linejoin="round"><path d="M${x-12} ${y-82} L${x+10} ${y-60} M${x+12} ${y-82} L${x-10} ${y-60}" stroke="#7a4e2c" stroke-width="4"/><path d="M${x-40} ${y} L${x} ${y-68} L${x+40} ${y}Z" fill="#fff3d6"/><path d="M${x-28} ${y-20} H${x+28} M${x-20} ${y-34} H${x+20}" stroke="#cf4a3e" stroke-width="5"/><path d="M${x} ${y-30} L${x-10} ${y} H${x+10}Z" fill="#7a4e2c"/></g>`;
+  if(type==='trehytte') return `<g stroke="${I}" stroke-width="3" stroke-linejoin="round"><rect x="${x-8}" y="${y-60}" width="16" height="60" fill="#8a5a33"/><circle cx="${x-30}" cy="${y-96}" r="26" fill="#4e9a3f"/><circle cx="${x+30}" cy="${y-100}" r="28" fill="#5c9a47"/><rect x="${x-34}" y="${y-92}" width="68" height="40" rx="4" fill="#c8894f"/><path d="M${x-40} ${y-92} L${x} ${y-118} L${x+40} ${y-92}Z" fill="#cf4a3e"/><rect x="${x-10}" y="${y-80}" width="20" height="16" fill="#ffd36a"/><path d="M${x+26} ${y-52} V${y} M${x+38} ${y-52} V${y} M${x+26} ${y-40} H${x+38} M${x+26} ${y-26} H${x+38} M${x+26} ${y-12} H${x+38}" stroke-width="2.5"/></g>`;
+  if(type==='boble') return `<g stroke="${I}" stroke-width="3"><path d="M${x-44} ${y} A44 44 0 0 1 ${x+44} ${y}Z" fill="rgba(223,241,247,.65)"/><rect x="${x-24}" y="${y-18}" width="48" height="14" rx="5" fill="#fff8ec"/><rect x="${x-24}" y="${y-24}" width="14" height="8" rx="3" fill="#ee86b6"/><path d="M${x-30} ${y-28} Q${x-20} ${y-40} ${x-6} ${y-38}" stroke="#fff" stroke-opacity=".8" fill="none"/><path d="M${x-48} ${y} H${x+48}"/></g>`;
+  if(type==='flytende') return `<g stroke="${I}" stroke-width="3" stroke-linejoin="round" class="bob-slow"><rect x="${x-46}" y="${y-6}" width="92" height="12" rx="4" fill="#a87747"/><rect x="${x-32}" y="${y-44}" width="64" height="38" fill="#fff0cf"/><path d="M${x-38} ${y-44} L${x} ${y-66} L${x+38} ${y-44}Z" fill="#2b6f78"/><rect x="${x-20}" y="${y-34}" width="16" height="14" fill="#9fd8e8"/><rect x="${x+6}" y="${y-30}" width="14" height="24" fill="#7a4e2c"/></g>`;
+  return '';
+}
+function vFacSVG(id,lit){
+  const f=VFAC[id], x=f.x, y=f.y, I=GI;
+  if(id==='baal') return `<g stroke="${I}" stroke-width="3">${[-16,0,16].map(d=>`<rect x="${x-26}" y="${y-6+d/4}" width="52" height="9" rx="4" fill="#8a5a33" transform="rotate(${d} ${x} ${y})"/>`).join('')}${lit?`<path d="M${x-16} ${y-6} Q${x-20} ${y-30} ${x-4} ${y-44} Q${x-2} ${y-28} ${x+6} ${y-26} Q${x+8} ${y-46} ${x+18} ${y-54} Q${x+16} ${y-30} ${x+20} ${y-6}Z" fill="#f2a234" class="flame"/><path d="M${x-8} ${y-6} Q${x-6} ${y-22} ${x+4} ${y-30} Q${x+8} ${y-18} ${x+12} ${y-6}Z" fill="#f7c948" class="flame"/><circle cx="${x}" cy="${y-20}" r="60" fill="#ffd36a" opacity=".18" stroke="none"/>`:''}${[[-56,8],[56,8],[0,30]].map(([dx,dy])=>`<rect x="${x+dx-18}" y="${y+dy-4}" width="36" height="10" rx="4" fill="#a87747"/>`).join('')}</g>`;
+  if(id==='service') return `<g stroke="${I}" stroke-width="3"><rect x="${x-34}" y="${y-44}" width="68" height="48" fill="#c8894f"/><path d="M${x-40} ${y-44} L${x} ${y-66} L${x+40} ${y-44}Z" fill="#5c9a47"/><rect x="${x-24}" y="${y-30}" width="18" height="34" fill="#7a4e2c"/><rect x="${x+6}" y="${y-30}" width="18" height="34" fill="#7a4e2c"/><circle cx="${x-15}" cy="${y-22}" r="3" fill="#fff8ec" stroke="none"/><circle cx="${x+15}" cy="${y-22}" r="3" fill="#fff8ec" stroke="none"/></g>`;
+  if(id==='kajakk') return `<g stroke="${I}" stroke-width="3"><path d="M${x-60} ${y} q60 -16 120 0 q-60 14 -120 0z" fill="#cf4a3e"/><path d="M${x-50} ${y+14} q60 -16 120 0 q-60 14 -120 0z" fill="#f7c948"/><path d="M${x-20} ${y-14} L${x+30} ${y+20}" stroke="#7a4e2c" stroke-width="4"/></g>`;
+  if(id==='stamp') return `<g stroke="${I}" stroke-width="3"><ellipse cx="${x}" cy="${y}" rx="40" ry="12" fill="#7fd0dc"/><path d="M${x-40} ${y} V${y+30} Q${x} ${y+42} ${x+40} ${y+30} V${y}" fill="#a87747"/><path d="M${x-20} ${y+4} V${y+34} M${x} ${y+6} V${y+38} M${x+20} ${y+4} V${y+34}" stroke-width="1.5"/><path d="M${x-14} ${y-8} q-6 -12 0 -24 M${x+10} ${y-8} q-6 -12 0 -24" fill="none" stroke="#9aa6b2" class="smoke"/><rect x="${x+38}" y="${y-30}" width="10" height="44" fill="#6b6478"/></g>`;
+  if(id==='klatre') return `<g stroke="${I}" stroke-width="3"><path d="M${x-50} ${y+60} V${y-10} M${x+70} ${y+60} V${y-20}" stroke="#8a5a33" stroke-width="10"/><circle cx="${x-50}" cy="${y-24}" r="22" fill="#4e9a3f"/><circle cx="${x+70}" cy="${y-34}" r="24" fill="#5c9a47"/><path d="M${x-44} ${y+4} Q${x+10} ${y+24} ${x+64} ${y-4}" fill="none" stroke="#7a4e2c" stroke-width="3"/><path d="M${x-44} ${y+14} Q${x+10} ${y+34} ${x+64} ${y+6}" fill="none" stroke="#7a4e2c" stroke-width="2" stroke-dasharray="6 4"/><circle cx="${x+10}" cy="${y+18}" r="5" fill="#cf4a3e"/></g>`;
+  if(id==='stjerne') return `<g stroke="${I}" stroke-width="3"><rect x="${x-40}" y="${y}" width="80" height="12" fill="#a87747"/><path d="M${x-32} ${y+12} v24 M${x+32} ${y+12} v24" stroke-width="5"/><g transform="rotate(-30 ${x} ${y-14})"><rect x="${x-24}" y="${y-20}" width="48" height="12" rx="4" fill="#e3b53c"/></g><path d="M${x} ${y-6} V${y}" stroke-width="3"/></g>`;
+  return '';
+}
+function villScene(){
+  if(!villOpen()){S.scene='kart';return mapScene();}
+  const v=VL(), night=isNight(), eve=isEvening(), lit=v.litDay===S.day&&(eve||night);
+  if(!v.intro){v.intro=true;save();setTimeout(()=>say('frida',[L('Velkommen til Villøya! Jeg er Frida, skogvokteren her ute.','Welcome to Wild Isle! I’m Frida, the forest ranger out here.'),L('Ingen har bygget noe her før. Hva med en glampingplass? Telt, trehytter, leirbål …','Nobody has built anything here before. How about a glamping site? Tents, treehouses, campfires …'),L('Trykk på en tom tomt for å bygge. Samle ved på stranden og i skogen, så kan vi tenne bål om kvelden.','Tap an empty plot to build. Collect firewood on the beach and in the forest, and we can light a fire in the evening.')]),300);}
+  const sky=night?'#1c2147':eve?'#f2a96b':'#9fd8e8';
+  let s=`<rect width="800" height="520" fill="${sky}" stroke="none"/>${night?Array.from({length:30},(_,i)=>{const h=hashStr('vs'+i);return `<circle cx="${h%800}" cy="${(h>>>8)%120}" r="1.6" fill="#fff3c4" stroke="none" class="twinkle" style="animation-delay:${(h%20)/10}s"/>`;}).join(''):''}
+   <rect y="80" width="800" height="440" fill="#4aa6b4" stroke="none"/>
+   <path d="M25 340 Q15 150 170 105 Q330 70 520 90 Q730 115 778 300 Q788 430 640 478 Q470 510 280 504 Q85 498 25 340Z" fill="#f4d79c"/>
+   <path d="M65 330 Q55 175 185 128 Q330 95 510 112 Q700 138 738 290 Q748 390 620 438 Q470 476 290 468 Q115 462 65 330Z" fill="#7cbf5a"/>
+   ${[[195,118],[615,116],[738,392],[575,105]].map(([x,y])=>`<g><path d="M${x} ${y+30} V${y+10}" stroke="#7a4e2c" stroke-width="6"/><path d="M${x-18} ${y+14} L${x} ${y-24} L${x+18} ${y+14}Z" fill="#3d6d2e"/></g>`).join('')}
+   <g class="hot" data-act="go" data-arg="kart"><path d="M10 440 h90 v14 h-90z" fill="#a87747"/><path d="M20 454 v24 M90 454 v24" stroke-width="5"/><text x="55" y="430" text-anchor="middle" font-size="14" font-weight="900" fill="${GI}" stroke="none" font-family="Grandstander, sans-serif">${L('← Kart','← Map')}</text></g>
+   <g class="hot" data-act="sheet" data-arg="villLevel"><rect x="40" y="380" width="96" height="56" rx="6" fill="#c8894f"/><path d="M34 380 L88 350 L142 380Z" fill="#cf4a3e"/><rect x="50" y="356" width="76" height="16" rx="4" fill="#fff8ec" transform="translate(0 40)"/><text x="88" y="408" text-anchor="middle" font-size="11" font-weight="900" fill="${GI}" stroke="none" font-family="Grandstander, sans-serif">${L('VELKOMMEN','WELCOME')}</text></g>
+   <g class="hot" data-act="villTalk">${svgAv(NPCS.frida.look,150,318,70)}</g>`;
+  VWOOD.forEach(([x,y],i)=>{ if(!v.woodDay[i+'|'+S.day]) s+=`<g class="hot pool-item bob" data-act="vWood" data-arg="${i}"><circle cx="${x}" cy="${y}" r="20" fill="transparent" stroke="none"/><rect x="${x-18}" y="${y-5}" width="36" height="10" rx="5" fill="#a87747" transform="rotate(-12 ${x} ${y})"/><circle cx="${x+15}" cy="${y-4}" r="4" fill="#d9a066"/></g>`; });
+  const items=[];
+  Object.keys(VFAC).forEach(id=>{const f=VFAC[id]; if(v.fac[id]) items.push([f.y,`<g class="hot" data-act="vFacInfo" data-arg="${id}">${vFacSVG(id,id==='baal'&&lit)}</g>`]); else if(v.lvl>=f.lvl) items.push([f.y,`<g class="hot" data-act="sheet" data-arg="villBuild"><circle cx="${f.x}" cy="${f.y-10}" r="16" fill="#fff8ec" stroke="${GI}" stroke-width="2.5" stroke-dasharray="4 3"/><text x="${f.x}" y="${f.y-4}" text-anchor="middle" font-size="18" font-weight="900" fill="${GI}" stroke="none">+</text></g>`]);});
+  VPLOTS.forEach((pl,i)=>{
+    const u=v.units[i];
+    if(u&&u.type){
+      const g=u.guest;
+      items.push([pl.y,`<g class="hot" data-act="vUnit" data-arg="${i}">${vUnitSVG(u.type,pl.x,pl.y)}${u.dirty?`<g><circle cx="${pl.x+30}" cy="${pl.y-50}" r="13" fill="#fff8ec" stroke="${GI}" stroke-width="2"/><text x="${pl.x+30}" y="${pl.y-44}" text-anchor="middle" font-size="14" stroke="none">🧹</text></g>`:''}${g?`${svgAv(Object.assign({},g.look,{bg:'none'}),pl.x-52,pl.y-46,40)}${g.status==='klar'?`<g><rect x="${pl.x-34}" y="${pl.y+4}" width="68" height="20" rx="10" fill="#5c9a47" stroke="${GI}" stroke-width="2"/><text x="${pl.x}" y="${pl.y+18}" text-anchor="middle" font-size="11" font-weight="900" fill="#fff" stroke="none">${L('Sjekk ut','Check out')}</text></g>`:''}`:''}</g>`]);
+    } else if(v.lvl>=pl.lvl){
+      items.push([pl.y,`<g class="hot" data-act="vPlot" data-arg="${i}"><ellipse cx="${pl.x}" cy="${pl.y-4}" rx="36" ry="12" fill="${pl.water?'#7fd0dc':'#c9d78a'}" stroke="${GI}" stroke-width="2.5" stroke-dasharray="6 4"/><text x="${pl.x}" y="${pl.y+2}" text-anchor="middle" font-size="16" font-weight="900" fill="${GI}" stroke="none">+</text></g>`]);
+    }
+  });
+  items.sort((a,b)=>a[0]-b[0]).forEach(it=>s+=it[1]);
+  s+=night?'<rect width="800" height="520" fill="rgba(20,24,60,.35)" pointer-events="none" stroke="none"/>':'';
+  const svg=`<svg class="lobby-svg" viewBox="0 0 800 520" role="img" aria-label="${L('Villøya','Wild Isle')}"><g stroke="${GI}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">${s}</g></svg>`;
+  const q=v.queue.length?v.queue.map(g=>`<button class="lq" data-act="vGuest" data-arg="${g.uid}"><span class="lq-av">${avatar(g.look)}</span><span class="lq-tx"><b>${esc(g.name)}</b><small>${VWISH[g.wish].e} ${esc(L(VWISH[g.wish].no,VWISH[g.wish].en))}</small></span></button>`).join(''):`<p class="muted lq-empty">${vUnits().length?L('Ingen campinggjester venter akkurat nå.','No campers are waiting right now.'):L('Bygg et telt, så kommer de første gjestene!','Build a tent and the first guests will come!')}</p>`;
+  return `<div class="scene lobby-scene ph-${phase()}"><div class="lobby-wrap">${svg}<div class="look-cap" id="lookCap" hidden></div></div>
+   <div class="lobby-ui"><div class="lobby-bar"><b class="lb-title">🏕️ ${L('Villøya','Wild Isle')} ${'★'.repeat(v.lvl)}${'☆'.repeat(VMAX-v.lvl)}</b><span class="tag">🪵 ${v.wood} ${L('ved','firewood')}</span><span class="tag">${v.fac.baal?(lit?L('🔥 Bålet brenner','🔥 The fire is lit'):L('🔥 Bålet tennes kl. 18 (2 ved)','🔥 The fire is lit at 18:00 (2 wood)')):L('Bygg et leirbål','Build a campfire')}</span><button class="btn small blue" data-act="sheet" data-arg="villLevel">${L('Nivå og krav','Level and requirements')}</button><button class="btn small soft" data-act="sheet" data-arg="villBuild">🔨 ${L('Bygg','Build')}</button><button class="btn small soft" data-act="go" data-arg="kart">${L('← Kart','← Map')}</button></div>
+   <div class="lq-list">${q}</div></div></div>`;
+}
+function villLevelSheet(){
+  const v=VL(), n=v.lvl+1, rows=vReqRows(n);
+  if(!rows) return {title:L('Villøya','Wild Isle'),icon:'🏕️',body:`<p style="font-weight:700">${L('Villøya har fem stjerner! Den fineste glampingplassen langs kysten.','Wild Isle has five stars! The finest glamping site along the coast.')}</p>`};
+  const ok=rows.every(r=>r[1]>=r[2]);
+  return {title:L(`Villøya: mot ${n} 🏕️`,`Wild Isle: towards ${n} 🏕️`),icon:'🏕️',body:`${rows.map(([l,a,b])=>`<div class="req"><span>${l}</span><div class="bar"><i style="width:${Math.min(100,a/Math.max(1,b)*100)}%"></i></div><b>${Math.min(a,b)} / ${b}</b></div>`).join('')}
+   <div class="card"><span class="label">${L('Dette låses opp','This unlocks')}</span><ul style="margin:6px 0 0;padding-left:20px;font-weight:700">${Object.values(VUNITS).filter(t=>t.lvl===n).map(t=>`<li>${L(t.no,t.en)}</li>`).join('')}${Object.values(VFAC).filter(f=>f.lvl===n).map(f=>`<li>${L(f.no,f.en)}</li>`).join('')}${VPLOTS.filter(p=>p.lvl===n).length?`<li>${L('Nye tomter','New plots')}</li>`:''}</ul></div>
+   <button class="btn big ${ok?'green':''}" data-act="villUp" ${ok?'':'disabled'}>${ok?L('Oppgrader Villøya!','Upgrade Wild Isle!'):L('Ikke helt klar ennå','Not quite ready yet')}</button>`};
+}
+function villBuildSheet(p){
+  const v=VL();
+  const plot=p!=null&&p!==''?+p:null;
+  let units='';
+  if(plot!=null){const pl=VPLOTS[plot], cur=v.units[plot];
+    units=`<span class="label">${L('Bygg på tomten','Build on the plot')}${pl.hav?' · 🌊':''}${pl.water?' · '+L('på vannet','on the water'):''}</span><div class="picker">${Object.entries(VUNITS).filter(([id])=>(id==='flytende')===!!pl.water).map(([id,t])=>{const lock=v.lvl<t.lvl, isCur=cur&&cur.type===id;
+      return `<div class="pick-row ${lock?'locked':''}"><span class="pi"><svg viewBox="${VPLOTS[0].x-60} ${VPLOTS[0].y-130} 120 140" class="fa">${vUnitSVG(id,VPLOTS[0].x,VPLOTS[0].y)}</svg></span><div class="tx"><b>${L(t.no,t.en)}</b><small>♥ ${t.c} ${L('komfort','comfort')}${lock?` · 🔒 ${t.lvl} 🏕️`:''}</small></div>${isCur?`<span class="tag ok">${L('Står her','Built here')}</span>`:lock?'<span>🔒</span>':`<button class="btn small" data-act="vBuildUnit" data-arg="${plot}|${id}" ${S.coins<t.cost?'disabled':''}><span class="coin" style="width:14px;height:14px"></span>${t.cost}</button>`}</div>`;}).join('')}</div>`;}
+  const facs=`<span class="label">${L('Aktiviteter','Activities')}</span><div class="picker">${Object.entries(VFAC).map(([id,f])=>{const lock=v.lvl<f.lvl;return `<div class="pick-row ${lock?'locked':''}"><span class="pi"><svg viewBox="${f.x-70} ${f.y-80} 140 130" class="fa">${vFacSVG(id,true)}</svg></span><div class="tx"><b>${L(f.no,f.en)}</b><small>${esc(L(f.dno,f.den))}${lock?` · 🔒 ${f.lvl} 🏕️`:''}</small></div>${v.fac[id]?`<span class="tag ok">✓</span>`:lock?'<span>🔒</span>':`<button class="btn small" data-act="vBuildFac" data-arg="${id}" ${S.coins<f.cost?'disabled':''}><span class="coin" style="width:14px;height:14px"></span>${f.cost}</button>`}</div>`;}).join('')}</div>`;
+  return {title:L('Bygg på Villøya','Build on Wild Isle'),icon:'🔨',body:units+facs};
+}
+function vGuestSheet(uid){
+  const v=VL(), g=v.queue.find(x=>x.uid==uid); if(!g) return null; const w=VWISH[g.wish];
+  const rows=vUnits().map(u=>{const free=!u.guest&&!u.dirty;const t=VUNITS[u.type];const ok=w.ok(u);
+    return `<div class="pick-row ${free?'':'locked'}"><span class="pi"><svg viewBox="${VPLOTS[0].x-60} ${VPLOTS[0].y-130} 120 140" class="fa">${vUnitSVG(u.type,VPLOTS[0].x,VPLOTS[0].y)}</svg></span><div class="tx"><b>${L(t.no,t.en)}${VPLOTS[u.p].hav?' 🌊':''}</b><small>♥ ${vComfort(u)} ${ok?'· <span class="tag ok">'+L('passer ønsket','matches the wish')+'</span>':''}</small></div>${free?`<button class="btn small green" data-act="vAssign" data-arg="${g.uid}|${u.p}">${L('Velg','Choose')}</button>`:`<small class="muted" style="font-weight:800">${u.guest?L('Opptatt','Taken'):L('Må ryddes','Needs tidying')}</small>`}</div>`;}).join('');
+  return {title:L('Ny campinggjest!','New camper!'),icon:'🏕️',body:`<div class="guest-box">${avatar(g.look)}<div style="flex:1;min-width:200px"><b style="font-family:var(--display);font-size:18px">${esc(g.name)}</b><p class="quote" style="margin-top:4px">«${esc(L(w.no,w.en))}»</p><small class="muted" style="font-weight:700">${L(`Ønsker komfort på minst ${g.need} ♥.`,`Wants at least ${g.need} ♥ comfort.`)}</small></div></div><span class="label">${L('Velg et sted å bo','Choose a place to stay')}</span><div class="picker">${rows}</div>`};
+}
+function vUnitTap(p){
+  const u=VL().units[p]; if(!u) return;
+  if(u.guest&&u.guest.status==='klar') return vCheckout(p);
+  if(u.dirty) return vTidy(p);
+  if(u.guest){const g=u.guest;showLook(L(`${g.name} koser seg i ${VUNITS[u.type].d}. ${VWISH[g.wish].e} ${VWISH[g.wish].ok(u)?'Ønsket er oppfylt!':'Ønsket er ikke oppfylt ennå.'}`,`${g.name} is enjoying the ${VUNITS[u.type].en.toLowerCase()}. ${VWISH[g.wish].e} ${VWISH[g.wish].ok(u)?'The wish is fulfilled!':'The wish isn’t fulfilled yet.'}`));return;}
+  openSheet('villBuild',p);
+}
+function villTalk(){
+  const v=VL(); const lines=[];
+  if(!vUnits().length) lines.push(L('Start med et telt på en av tomtene. Det er billig og gjestene elsker det.','Start with a tent on one of the plots. It’s cheap and guests love it.'));
+  else if(!v.fac.baal) lines.push(L('Et leirbål hadde vært fint! Speiderne spør etter det hele tiden.','A campfire would be nice! The scouts keep asking for one.'));
+  else if(v.wood<2) lines.push(L('Vi trenger ved til bålet i kveld. Se etter drivved på stranden og greiner i skogen.','We need firewood for tonight’s fire. Look for driftwood on the beach and branches in the forest.'));
+  else lines.push(pick([L('Hørte du ugla i natt? Den bor i den høyeste furua.','Did you hear the owl last night? It lives in the tallest pine.'),L('Husk å rydde etter gjestene. Naturen skal se ut som vi aldri var her.','Remember to tidy after the guests. Nature should look as if we were never here.'),L('På Villøya er det stjernene som er taklampa.','On Wild Isle the stars are the ceiling light.')]));
+  say('frida',lines);
+}
+
+
+/* ---------------- HOTELLHAGE-FANER ---------------- */
+const facNewList=()=>FAC.filter(f=>!['restaurant','basseng','kino'].includes(f.id)&&!S.fac[f.id]&&!S.builds[f.id]);
+const facCanBuild=()=>facNewList().some(f=>S.stars>=f.star&&S.coins>=f.cost);
+function lawnTabs(){
+  const t=S.lawnTab||'hage';
+  const tabs=[['hage','🌳',L('Hagen','Garden'),''],['fly','🌊',L('Sjøfløyen','Sea Wing'),S.stars<6?'🔒':''],['anlegg','🎡',L('Anlegg','Facilities'),facCanBuild()?'<i class="lt-dot"></i>':''],['mer','⋯',L('Mer','More'),'']];
+  return `<div class="lawn-tabs" role="tablist">${tabs.map(([id,ic,n,x])=>`<button class="lawn-tab ${t===id?'on':''}" role="tab" aria-selected="${t===id}" data-act="lawnTab" data-arg="${id}"><span class="lt-ic">${ic}</span> <span>${n}${x?' '+x:''}</span></button>`).join('')}</div>`;
+}
+function lawnBody(facTiles,moreRow){
+  const t=S.lawnTab||'hage';
+  if(t==='fly') return wingPanel();
+  if(t==='mer') return `<div class="row">${moreRow}</div>`;
+  if(t==='anlegg'){
+    const nNew=facNewList().length, nOk=facNewList().filter(f=>S.stars>=f.star).length;
+    return `<div class="fac-grid">${facTiles}${nNew?`<button class="fac plot fac-new" data-act="sheet" data-arg="facNew"><span class="fi">🔨</span><b>${L('Bygg nytt','Build new')}</b><small>${nOk?L(`${nOk} kan bygges`,`${nOk} available`):L('Flere kommer','More to come')}</small></button>`:''}</div>${facTiles?'':`<p class="lawn-note">${L('Du har ingen anlegg ennå. Hvert anlegg gir litt ekstra betaling per gjest.','You have no facilities yet. Each facility gives a little extra pay per guest.')}</p>`}`;
+  }
+  return gardenSVG();
+}
+function facNewSheet(){
+  const list=facNewList().sort((a,b)=>(S.stars>=a.star?0:1)-(S.stars>=b.star?0:1)||a.cost-b.cost);
+  const tiles=list.map(f=>S.stars<f.star?`<div class="fac locked"><span class="fi">🔒</span><b>${f.name}</b><small>${L('Krever','Needs')} ${starStr(f.star,0)}</small></div>`:`<button class="fac plot" data-act="fac" data-arg="${f.id}"><span class="fi">${f.icon}</span><b>${f.name}</b><small><span class="coin" style="width:14px;height:14px;vertical-align:-2px"></span> ${f.cost}</small></button>`).join('');
+  return {title:L('Bygg et nytt anlegg','Build a new facility'),icon:'🔨',body:`<p class="muted" style="font-weight:700;margin-top:0">${L('Trykk på et anlegg for å se hva det gjør og bygge det.','Tap a facility to see what it does and build it.')}</p><div class="fac-grid">${tiles||`<p>${L('Du har bygget alt!','You have built everything!')}</p>`}</div>`};
+}
 const CLEAN_MIN=20; // spillminutter per rom for ryddehjelpen
 const floorName=f=>FLOORS[f].name?(S.lang==='en'?tr(FLOORS[f].name):FLOORS[f].name):L(f+'. etasje',['','1st','2nd','3rd'][f]?['','1st','2nd','3rd'][f]+' floor':f+'th floor');
 const CLEAN_MULTI_STAR=5; // fra 5 stjerner: én ryddehjelp i hver etasje samtidig
@@ -5220,6 +5559,7 @@ const AREA_SCENES={
 function areaScene(id){
   if(id==='hotell'){S.scene='hotell';return hotelScene();}
   if(id==='makeskjaer') return islandScene();
+  if(id==='villoya') return villScene();
   const a=areaById(id); const d=AREA_SCENES[id]();
   if(AREA_ART[id]) return `<div class="scene area"><div class="scape-art">${areaArtSVG(id)}<div class="area-title">${a.icon} ${a.name}</div><button class="btn small soft back" data-act="go" data-arg="kart">← Kart</button><div class="look-cap" id="lookCap" hidden></div></div>
    <div class="area-body"><p class="muted" style="font-weight:700">${a.desc}</p>${d.acts?`<div class="acts">${d.acts}</div>`:''}${d.custom?d.custom():''}</div></div>`;
@@ -5259,6 +5599,10 @@ function renderSheet(soft){
 $('#sheet').addEventListener('click',e=>{if(e.target.id==='sheet')closeSheet();});
 
 const SHEETS={
+  facNew(){return facNewSheet();},
+  villLevel(){return villLevelSheet();},
+  villBuild(p){return villBuildSheet(p);},
+  vGuest(uid){return vGuestSheet(uid);},
   wing(id){return wingSheet(id);},
   recep(){return recepSheet();},
   restLevels(){return restLevelsSheet();},
@@ -5428,6 +5772,17 @@ const colReadyCount=()=>Object.keys(COLS).filter(t=>colDone(t)&&!S.colClaimed.in
 
 /* ---------------- HANDLINGER ---------------- */
 const ACT={
+  lawnTab(t){S.lawnTab=t;sfx('click');renderScene(true);save();},
+  vWood(i){vWood(+i);},
+  vUnit(p){vUnitTap(+p);},
+  vPlot(p){openSheet('villBuild',+p);},
+  vFacInfo(id){const f=VFAC[id];if(f)showLook(L(f.dno,f.den));},
+  villTalk(){villTalk();},
+  vGuest(uid){openSheet('vGuest',uid);},
+  villUp(){villUpgrade();},
+  vBuildUnit(a){vBuildUnit(a);},
+  vBuildFac(id){vBuildFac(id);},
+  vAssign(a){vAssign(a);},
   go(a){closeDialogs();go(a);},
   toast(a){toast(a);},
   sheet(a){openSheet(a);},
@@ -5506,7 +5861,8 @@ const ACT={
   talk(id){talk(id);},
   fac(id){openSheet('fac',id);},
   mk(id){mkAct(id);},
-  wing(id){openSheet('wing',id);},
+  wing(id){if(WING_ROOMS.includes(id)&&S.wing&&S.wing[id]){go('wing:'+id);return;}openSheet('wing',id);},
+  wlook(id){showLook(wingLook(id));},wingAct(k){wingAct(k);},vinterOrange(){vinterOrange();},vinterBird(){vinterBird();},loungePiano(){loungePiano();},
   wingBuild(id){startWing(id);},
   claimDaily(id){claimDaily(id);},
   alook(id){const f=AREA_LOOKS[id];if(f)showLook(f());},
@@ -5786,7 +6142,7 @@ trObserver.observe(document.body,{childList:true,subtree:true,characterData:true
 document.documentElement.lang=S.lang==='en'?'en':'no';
 if(S.lang==='en') trNode(document.body);
 lastPhase=phase();
-S.scene=S.scene&&(S.scene==='kart'||S.scene==='hotell'||S.scene==='restaurant'||S.scene==='lobby'||S.scene.startsWith('area:')||S.scene.startsWith('fac:')||S.scene==='mkhus'||S.scene==='kjeller')?S.scene:'hotell';
+S.scene=S.scene&&(S.scene==='kart'||S.scene==='hotell'||S.scene==='restaurant'||S.scene==='lobby'||S.scene.startsWith('area:')||S.scene.startsWith('fac:')||S.scene.startsWith('wing:')||S.scene==='mkhus'||S.scene==='kjeller')?S.scene:'hotell';
 ensureMe();
 mai17Greeting();
 ensureDaily();
